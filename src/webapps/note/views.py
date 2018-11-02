@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout,tokens
 from django.contrib.auth.decorators import login_required
-from note.models import POSTING, myUser
+from note.models import *
 from note.forms import *
 from mimetypes import guess_type
 from django.core.mail import send_mail
