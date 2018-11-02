@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 import note.views 
 urlpatterns = [
-    path('', note.views.login),
+    path('', note.views.logIn),
     path('admin/', admin.site.urls),
     path('note/', include('note.urls')),
 ] 

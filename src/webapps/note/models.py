@@ -5,13 +5,13 @@ import datetime
 
 class Student(User):
     andrewid = models.CharField(max_length=20, blank = True, default = '') 
-    Identity = models.CharField(max_length=10, blank = True, default = 'S') # 'S' for Student, P for Professor
+    identity = models.CharField(max_length=10, blank = True, default = 'S') # 'S' for Student, P for Professor
     def __str__(self):
         return self.username 
 
 class Professor(User):
     andrewid = models.CharField(max_length=20, blank = True, default = '') 
-    Identity = models.CharField(max_length=10, blank = True, default = 'P') # 'S' for Student, P for Professor
+    identity = models.CharField(max_length=10, blank = True, default = 'P') # 'S' for Student, P for Professor
     def __str__(self):
         return self.username 
     

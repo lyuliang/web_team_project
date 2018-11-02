@@ -37,19 +37,18 @@
           <div class="col-12 my-auto">
             <div class="masthead-content text-white py-5 py-md-0">
               <h1 class="mb-3">Welcome to Note++!</h1>
-              <p class="mb-5">Share your own note, See others' thought and Improve your study from
-                <strong>Note++</strong>! Log to your account using the form below!</p>
+              <p class="mb-5">Share your own note, See others' thoughts <br> Ignite your Inspiration, Join
+                <strong>Note++</strong>! <br> Log to your account using the form below!</p>
               <div class="input-group input-group-newsletter">
-                 <form class="form-signin">
-
+                 <form class="form-signin" action="{% url 'login'%}" method="POST">
+                    {% csrf_token %} 
                   <p class="h3 mb-3 font-weight-normal" id="signin">Please sign in</p>
-                  <input type="andrew-id" id="andrew-id"  class="form-control" placeholder="Andrew ID" required autofocus>
-
-                  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                  <input type="username" name = "username" id="username" class="form-control" placeholder="User Name" required autofocus>
+                  <input type="password" name = "pw" id="inputPassword" class="form-control" placeholder="Password" required>
                   <div class="checkbox mb-3">
                     <label>
-                      <input type="checkbox" value="remember-me"> I am a student
-                      <input type="checkbox" value="remember-me"> I am a professor
+                      <input type="checkbox" name = "identity" value="S"> I am a student
+                      <input type="checkbox" name = "identity" value="P"> I am a professor
                     </label>
 
                   </div>
