@@ -76,3 +76,8 @@ def register(request):
 def index(request):
     context = {}
     return render(request,'index.html',context);
+
+@login_required
+def course(request):
+    context = {}
+    return render(request,'course.html',context);

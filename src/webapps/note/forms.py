@@ -7,7 +7,6 @@ class LogInForm(forms.Form):
     identity = forms.CharField(label = 'Identity', max_length=10)
     # Check If Identity is consistent 
     def clean(self):
-        
         cleaned_data = super(LogInForm, self).clean()  #Don't forget to call super.clean()
         idenity = self.cleaned_data['identity']
         if idenity != 'S' and idenity != 'P':
