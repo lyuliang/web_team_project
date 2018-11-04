@@ -20,7 +20,6 @@ class Course(models.Model):
     number = models.CharField(max_length=40)
     instructor = models.ForeignKey(Professor,on_delete=models.CASCADE)
     students = models.ManyToManyField(Student, blank=True)
-    #notes = models.ManyToManyField(Note, blank = True)
     def __str__(self):
         return self.number + self.name
 

@@ -42,7 +42,7 @@ def logIn(request):
         context['errors'] = ['form_error']
         return render(request, 'login.html', context)
         # error
-
+        
 def register(request):
     errors = []
     context = {}
@@ -75,23 +75,46 @@ def register(request):
     # redirect to Main page
     return redirect(reverse('index', args=(identity)))
 
+# Log out, return to Log in home page
+@login_required
+def logOut(request):
+    errors = []
+    context = {}
+    context['errors'] = errors
+    logout(request)
+    return render(request, 'login.html', context)
+
 @login_required
 def index(request, identity):
     context = {}
-
     if identity == 'S':
         if request.method == 'GET':
             print('JoinCourseForm()')
             context['form'] = JoinCourseForm()
+            student = Student.objects.get(username = request.user.username)
+            # Find courses took the logged in student
+            courses = student.course_set.all()
+            if len(courses):
+                context['courses'] = courses
+            else:
+                context['courses'] = Course.objects.all()
         return render(request, 'index_student.html', context)
     else:
         if request.method == 'GET':
             print('CreateCourseForm()')
             context['form'] = CreateCourseForm()
+            prof = Professor.objects.get(username = request.user.username)
+            # Find courses taught by the logged in professor
+            courses = Course.objects.filter(instructor = prof)
+            if len(courses):
+                context['courses'] = courses
+            else:
+                context['courses'] = Course.objects.all()
+            print(courses)
         return render(request, 'index_prof.html', context)
 
 @login_required
-def course(request):
+def course(request,course_id):
     context = {}
     return render(request,'course.html',context)
 

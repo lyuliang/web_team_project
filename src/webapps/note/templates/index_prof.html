@@ -1,43 +1,22 @@
 {% extends "index_base.html" %}
 {% block courses %}
 <div class="posts">
+{% for course in courses %}
 <article>
-	<a href="#" class="image"><img src="../../static/img/pic01.jpg" alt="" /></a>
-	<h3>14740</h3>
-	<p>Telecommunication</p>
+	<a href="{% url 'course' course.id %}" class="image"><img src="../../static/img/pic01.jpg" alt="" /></a>
+	<h3>{{course.number}}</h3>
+	<p>{{course.name}}</p>
 	<ul class="actions">
-		<li><a href="#" class="button">See Notes</a></li>
+		<li><a href="{% url 'course' course.id %}" class="button">See Notes</a></li>
 	</ul>
 </article>
-<article>
-	<a href="#" class="image"><img src="../../static/img/pic02.jpg" alt="" /></a>
-	<h3>14741</h3>
-	<p>Information Security</p>
-	<ul class="actions">
-		<li><a href="#" class="button">See Notes</a></li>
-	</ul>
-</article>
-<article>
-	<a href="course.html" class="image"><img src="../../static/img/pic03.jpg" alt="" /></a>
-	<h3>17637</h3>
-	<p>Web Application</p>
-	<ul class="actions">
-		<li><a href="course.html" class="button">See Notes</a></li>
-	</ul>
-</article>
-<article>
-	<a href="#" class="image"><img src="../../static/img/pic04.jpg" alt="" /></a>
-	<h3>15513</h3>
-	<p>Computer System</p>
-	<ul class="actions">
-		<li><a href="#" class="button">See Notes</a></li>
-	</ul>
-</article>
+{% endfor %}
+
 
 <article>
 	<!-- Button trigger modal -->
 <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
-  Create Course(之后改成加号）
+  Create course
 </button>
 
 <!-- Modal -->

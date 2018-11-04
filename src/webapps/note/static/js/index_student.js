@@ -1,5 +1,4 @@
 
-
 function joinCourse(){
     var course_name = $("#course_name")
     var course_number = $("#course_number")
