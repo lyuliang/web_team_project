@@ -41,6 +41,68 @@ class RegisterForm(forms.Form):
          # TODO Validation
         return idenity
 
+class CreateCourseForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        widgets = {'name': forms.Textarea(),
+                   'number': forms.Textarea()}
+        fields = ['name', 'number']
+
+    def __init__(self, *args, **kwargs):
+        super(CreateCourseForm, self).__init__(*args, **kwargs)
+
+        self.fields['name'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Course Name',
+                                                 'name':'course_name', 'id':'course_name'})
+        self.fields['number'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Course Number (5 digits)',
+                                                 'name':'course_number', 'id':'course_number'})
+
+    def clean_number(self):
+        number = self.cleaned_data.get('number')
+        print('number::', number)
+        if len(number) != 5 or not number.isdigit():
+            raise forms.ValidationError("Course number should be 5-digit integer")
+        if Course.objects.filter(number=number):
+            raise forms.ValidationError("Course number already exists.")
+        return number
+
+    def clean_name(self):
+        name = self.cleaned_data.get('name')
+        print('name::', name)
+        if Course.objects.filter(name=name):
+            raise forms.ValidationError("Course name already exists.")
+        return name
+    def clean(self):
+        cleaned_data = super(CreateCourseForm, self).clean()
+        name = cleaned_data.get('name')
+        number = cleaned_data.get('number')
+        print('name::', name)
+        print('number::', number)
+        if not name or not number:
+            raise forms.ValidationError("Must fill in course name and course number!")
+        return cleaned_data
+
+class JoinCourseForm(forms.Form):
+    name = forms.CharField(max_length=300, required=False)
+    number = forms.CharField(max_length=40, required=False)
+    def __init__(self, *args, **kwargs):
+        super(JoinCourseForm, self).__init__(*args, **kwargs)
+    def clean(self):
+        cleaned_data = super(JoinCourseForm, self).clean()
+        name = cleaned_data.get('name')
+        number = cleaned_data.get('number')
+        if not name and not number:
+            raise forms.ValidationError("Must fill in course name or course number!")
+        return cleaned_data
+
+    def clean_number(self):
+
+        number = self.cleaned_data.get('number')
+        if len(number) != 0 and (len(number) != 5 or not number.isdigit()):
+            raise forms.ValidationError("Course number should be 5-digit integer")
+        return number
+    def clean_name(self):
+        return self.cleaned_data.get('name')
+
 
 
 

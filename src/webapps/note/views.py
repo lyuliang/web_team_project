@@ -23,6 +23,7 @@ def logIn(request):
     form = LogInForm(request.POST)
     context['form'] = form
     if form.is_valid():
+        identity = form.cleaned_data['identity']
         user = authenticate(username = form.cleaned_data['username'], password = form.cleaned_data['pw'])
         if(not user):
             errors.append('Anthentication Error!')
@@ -32,7 +33,9 @@ def logIn(request):
         login(request,user)
         # Redirect to Index page
         print('login success')
-        return index(request)
+        # return index(request)
+
+        return redirect(reverse('index', args=(identity)))
     else: # Form Error
         print('Form error')
         print(form.non_field_errors)
@@ -70,14 +73,83 @@ def register(request):
         password = request.POST['pw'])
     login(request,new_user)
     # redirect to Main page
-    return index(request)
+    return redirect(reverse('index', args=(identity)))
 
 @login_required
-def index(request):
+def index(request, identity):
     context = {}
-    return render(request,'index.html',context);
+
+    if identity == 'S':
+        if request.method == 'GET':
+            print('JoinCourseForm()')
+            context['form'] = JoinCourseForm()
+        return render(request, 'index_student.html', context)
+    else:
+        if request.method == 'GET':
+            print('CreateCourseForm()')
+            context['form'] = CreateCourseForm()
+        return render(request, 'index_prof.html', context)
 
 @login_required
 def course(request):
     context = {}
-    return render(request,'course.html',context);
+    return render(request,'course.html',context)
+
+@login_required
+@transaction.atomic
+def create_course(request):
+    print('enter create course')
+    instructor = get_object_or_404(Professor, username=request.user.username)
+    print('instructor name:',instructor.username)
+    new_course = Course(instructor=instructor)
+    # new_course.name = request.POST.get('name')
+    # new_course.number = request.POST.get('number')
+    print(request.POST)
+    # print(new_course.name)
+    # print(new_course.number)
+    form = CreateCourseForm(request.POST, instance=new_course)
+    if not form.is_valid():
+        # raise Http404
+        print('error:', form.errors)
+        return HttpResponse(form.errors)
+    else:
+        print('no error')
+        form.save()
+    return HttpResponse("")
+
+@login_required
+@transaction.atomic
+def join_course(request):
+    student = get_object_or_404(Student, username=request.user.username)
+    form = JoinCourseForm(request.POST)
+    if not form.is_valid():
+        print('error:', form.errors)
+        return HttpResponse(form.errors)
+    name = form.cleaned_data['name']
+    number = form.cleaned_data['number']
+    course1 = Course.objects.filter(name=name)
+    course2 = Course.objects.filter(number=number)
+    print('course1:',course1, ' course2:',course2)
+    if not course1 and not course2:
+        print(("Course Not Found!"))
+        return HttpResponse("Course Not Found!")
+    elif not course2:
+        course = course1[0]
+    elif not course1:
+        course = course2[0]
+    elif course1[0] != course2[0]:
+        print("Course name and number don't match!")
+        return HttpResponse("Course name and number don't match!")
+    else:
+        course = course1[0]
+
+    if student in course.students.all():
+        print("Already joined this course!")
+        return HttpResponse("Already joined this course!")
+
+    course.students.add(student)
+    course.save()
+    print(course.students)
+    return HttpResponse("")
+
+

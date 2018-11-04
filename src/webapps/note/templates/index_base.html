@@ -54,7 +54,7 @@
     <!-- Header -->
         <header id="header">
             <a href="course.html" class="logo"><strong>Courses</strong> in 2018 Fall</a>
-                </header>
+        </header>
 
 
 <!-- Section -->
@@ -62,40 +62,7 @@
 <header class="major">
 <h2>Course List</h2>
 </header>
-<div class="posts">
-<article>
-	<a href="#" class="image"><img src="../../static/img/pic01.jpg" alt="" /></a>
-	<h3>14740</h3>
-	<p>Telecommunication</p>
-	<ul class="actions">
-		<li><a href="#" class="button">See Notes</a></li>
-	</ul>
-</article>
-<article>
-	<a href="#" class="image"><img src="../../static/img/pic02.jpg" alt="" /></a>
-	<h3>14741</h3>
-	<p>Information Security</p>
-	<ul class="actions">
-		<li><a href="#" class="button">See Notes</a></li>
-	</ul>
-</article>
-<article>
-	<a href="course.html" class="image"><img src="../../static/img/pic03.jpg" alt="" /></a>
-	<h3>17637</h3>
-	<p>Web Application</p>
-	<ul class="actions">
-		<li><a href="course.html" class="button">See Notes</a></li>
-	</ul>
-</article>
-<article>
-	<a href="#" class="image"><img src="../../static/img/pic04.jpg" alt="" /></a>
-	<h3>15513</h3>
-	<p>Computer System</p>
-	<ul class="actions">
-		<li><a href="#" class="button">See Notes</a></li>
-	</ul>
-</article>
-            </div>
+{% block courses %}{% endblock %}
       </section>
 	</div>
 </div>
@@ -127,14 +94,18 @@
 </div>
 
 <!-- Scripts -->
+
 	<script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/jquery-3.3.1.min.js"></script>
 	<script src="../../static/js/browser.min.js"></script>
 	<script src="../../static/js/breakpoints.min.js"></script>
 	<script src="../../static/js/util.js"></script>
 	<script src="../../static/js/main.js"></script>
 
-	<script src="../../static/js/jquery-3.3.1.min.js"></script>
+
 	<script src="../../static/js/bootstrap.min.js"></script>
+
+    {% block js %}{% endblock %}
 
 	</body>
 </html>
