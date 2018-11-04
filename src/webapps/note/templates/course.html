@@ -7,12 +7,13 @@
 <html>
 	<head>
 		<title>Courses Hub</title>
+		{% load static %}
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../../static/css/main.css" />
-		<link href="../../static/css/bootstrap.min.css" rel="stylesheet">
-		<link href="../../static/css/navbar-top-fixed.css" rel="stylesheet">
-		<link href="../../static/css/bootstrap3.3.7.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+		<link href="{% static 'css/navbar-top-fixed.css' %}"  rel="stylesheet">
+		<link href="{% static 'css/bootstrap3.3.7.min.css' %}" rel="stylesheet">
 
 	</head>
 
@@ -124,15 +125,15 @@
 	</header>
 	<div class="mini-posts">
 		<article>
-			<a href="#" class="image"><img src="../../static/img/sample.jpg" alt="" /></a>
+			<a href="#" class="image"><img src="../static/img/sample.jpg" alt="" /></a>
 			<p>Charlie...</p>
 		</article>
 		<article>
-			<a href="#" class="image"><img src="../../static/img/pic08.jpg" alt="" /></a>
+			<a href="#" class="image"><img src="../static/img/pic08.jpg" alt="" /></a>
 			<p>Sunshine...</p>
 		</article>
 		<article>
-			<a href="#" class="image"><img src="../../static/img/pic09.jpg" alt="" /></a>
+			<a href="#" class="image"><img src="../static/img/pic09.jpg" alt="" /></a>
 			<p>Professor 3</p>
 		</article>
 	</div>
@@ -159,14 +160,14 @@
 </div>
 
 <!-- Scripts -->
-<script src="../../static/js/jquery.min.js"></script>
-<script src="../../static/js/browser.min.js"></script>
-<script src="../../static/js/breakpoints.min.js"></script>
-<script src="../../static/js/util.js"></script>
-<script src="../../static/js/main.js"></script>
+<script src ="{% static 'js/jquery.min.js'%}"></script>
+<script src="{% static 'js/browser.min.js'%}"></script>
+<script src="{% static 'js/breakpoints.min.js'%}"></script>
+<script src="{% static 'js/util.js'%}"></script>
+<script src="{% static 'js/main.js'%}"></script>
 
-<script src="../../static/js/jquery-3.3.1.min.js"></script>
-<script src="../../static/js/bootstrap.min.js"></script>
+<script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
 
 </body>
 </html>
