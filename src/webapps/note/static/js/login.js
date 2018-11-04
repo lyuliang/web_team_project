@@ -19,5 +19,9 @@ $(document).ready(function () {
         obj3.innerHTML="<a href='' class='register' id='login'> Log in</a>";
 
     });
+    // $("#check-student").focus(function () {
+    //     if()
+    //      $("#check-prof").attr("checked",false);
+    // })
 
 });
