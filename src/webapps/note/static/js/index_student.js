@@ -4,10 +4,12 @@ function joinCourse(){
     var course_number = $("#course_number")
     $.post("/note/join_course/", {"name": course_name.val(), "number": course_number.val()})
       .done(function(data) {
-          if (data == "") {//data==""说明views中return HttpResponse(""),即没有error)
-              $('#cancel').click()
-              ('#exampleModal').modal('hide'); 
-              // 显示新加的课程（为了方便也可以把课程列表整体刷新一遍）
+          // data contains valid HTML code
+          if (data.startsWith('<'))
+           {//data==""说明views中return HttpResponse(""),即没有error)
+              //$('#cancel').click()
+              $('#exampleModal').modal('hide'); 
+              $('.posts').append(data)
               // getUpdates(); //待实现
           }
           else {

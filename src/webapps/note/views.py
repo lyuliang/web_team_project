@@ -127,11 +127,7 @@ def create_course(request):
     instructor = get_object_or_404(Professor, username=request.user.username)
     print('instructor name:',instructor.username)
     new_course = Course(instructor=instructor)
-    # new_course.name = request.POST.get('name')
-    # new_course.number = request.POST.get('number')
     print(request.POST)
-    # print(new_course.name)
-    # print(new_course.number)
     form = CreateCourseForm(request.POST, instance=new_course)
     if not form.is_valid():
         # raise Http404
@@ -140,7 +136,7 @@ def create_course(request):
     else:
         print('no error')
         form.save()
-    return HttpResponse("")
+    return render(request,'single-course.html', context = {'course':new_course, 'identity':'P'})
 
 @login_required
 @transaction.atomic
@@ -157,24 +153,24 @@ def join_course(request):
     print('course1:',course1, ' course2:',course2)
     if not course1 and not course2:
         print(("Course Not Found!"))
-        return HttpResponse("Course Not Found!")
+        return HttpResponse("Error: Course Not Found!")
     elif not course2:
         course = course1[0]
     elif not course1:
         course = course2[0]
     elif course1[0] != course2[0]:
         print("Course name and number don't match!")
-        return HttpResponse("Course name and number don't match!")
+        return HttpResponse("Error: Course name and number don't match!")
     else:
         course = course1[0]
 
     if student in course.students.all():
         print("Already joined this course!")
-        return HttpResponse("Already joined this course!")
+        return HttpResponse("Error: Already joined this course!")
 
     course.students.add(student)
     course.save()
     print(course.students)
-    return HttpResponse("")
+    return render(request,'single-course.html', context = {'course':course, 'identity':'S'})
 
 

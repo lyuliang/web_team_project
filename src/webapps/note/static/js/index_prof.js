@@ -4,10 +4,10 @@ function createCourse(){
     var course_number = $("#course_number")
     $.post("/note/create_course/", {name: course_name.val(), number: course_number.val()})
       .done(function(data) {
-          if (data == "") {
-            ('#exampleModal').modal('hide'); 
-              // 显示新加的课程（为了方便也可以把课程列表整体刷新一遍）
-              // getUpdates(); //待实现
+          if (data.startsWith('<')) {
+            $('#exampleModal').modal('hide'); 
+            // Add new course to HTML
+             $('.posts').append(data)
           }
           else {
               // alert(data); //course name或number invalid，显示错误信息
