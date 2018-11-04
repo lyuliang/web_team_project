@@ -1,5 +1,6 @@
 {% extends "index_base.html" %}
 {% block courses %}
+{% load static %}
 <div class="posts">
     <article>
         <!-- Button trigger modal -->
@@ -54,5 +55,6 @@
             </div>
 {% endblock %}
 {% block js %}
-<script src="../../static/js/index_student.js"></script>
+<script src="{% static 'js/index_student.js'%}"></script>
+
 {% endblock %}

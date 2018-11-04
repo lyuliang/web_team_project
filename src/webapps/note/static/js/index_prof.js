@@ -19,7 +19,7 @@ function createCourse(){
 
 
 $(document).ready(function () {
-  console.log("good")
+  console.log("Document Ready")
   // Add event-handlers
   $("#create_course").click(function (e) {
       e.preventDefault();
