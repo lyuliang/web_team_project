@@ -5,7 +5,7 @@ function createCourse(){
     $.post("/note/create_course/", {name: course_name.val(), number: course_number.val()})
       .done(function(data) {
           if (data == "") {
-
+            ('#exampleModal').modal('hide'); 
               // 显示新加的课程（为了方便也可以把课程列表整体刷新一遍）
               // getUpdates(); //待实现
           }

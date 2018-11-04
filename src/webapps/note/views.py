@@ -42,7 +42,7 @@ def logIn(request):
         context['errors'] = ['form_error']
         return render(request, 'login.html', context)
         # error
-        
+
 def register(request):
     errors = []
     context = {}
@@ -87,6 +87,7 @@ def logOut(request):
 @login_required
 def index(request, identity):
     context = {}
+    context['identity'] = identity
     if identity == 'S':
         if request.method == 'GET':
             print('JoinCourseForm()')
@@ -114,8 +115,9 @@ def index(request, identity):
         return render(request, 'index_prof.html', context)
 
 @login_required
-def course(request,course_id):
+def course(request,course_id, identity):
     context = {}
+    context['identity'] = identity 
     return render(request,'course.html',context)
 
 @login_required

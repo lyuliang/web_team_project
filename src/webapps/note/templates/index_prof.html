@@ -3,11 +3,11 @@
 <div class="posts">
 {% for course in courses %}
 <article>
-	<a href="{% url 'course' course.id %}" class="image"><img src="../../static/img/pic01.jpg" alt="" /></a>
+	<a href="{% url 'course' course.id identity %}" class="image"><img src="../../static/img/pic01.jpg" alt="" /></a>
 	<h3>{{course.number}}</h3>
 	<p>{{course.name}}</p>
 	<ul class="actions">
-		<li><a href="{% url 'course' course.id %}" class="button">See Notes</a></li>
+		<li><a href="{% url 'course' course.id identity %}" class="button">See Notes</a></li>
 	</ul>
 </article>
 {% endfor %}

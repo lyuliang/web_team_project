@@ -6,6 +6,7 @@ function joinCourse(){
       .done(function(data) {
           if (data == "") {//data==""说明views中return HttpResponse(""),即没有error)
               $('#cancel').click()
+              ('#exampleModal').modal('hide'); 
               // 显示新加的课程（为了方便也可以把课程列表整体刷新一遍）
               // getUpdates(); //待实现
           }

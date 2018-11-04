@@ -25,7 +25,7 @@
   </button>
 	<ul class="navbar-nav mr-auto">
 	  <li class="nav-item active">
-		<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+		<a class="nav-link" href="{% url 'index' identity %}">Home <span class="sr-only">(current)</span></a>
 	  </li>
 	  <li class="nav-item">
 		<a class="nav-link" href="#">My Favor</a>
@@ -125,15 +125,15 @@
 	</header>
 	<div class="mini-posts">
 		<article>
-			<a href="#" class="image"><img src="../static/img/sample.jpg" alt="" /></a>
+			<a href="#" class="image"><img src="{% static 'img/sample.jpg' %}" alt="" /></a>
 			<p>Charlie...</p>
 		</article>
 		<article>
-			<a href="#" class="image"><img src="../static/img/pic08.jpg" alt="" /></a>
+			<a href="#" class="image"><img src="{% static 'img/pic08.jpg' %}" alt="" /></a>
 			<p>Sunshine...</p>
 		</article>
 		<article>
-			<a href="#" class="image"><img src="../static/img/pic09.jpg" alt="" /></a>
+			<a href="#" class="image"><img src="{% static 'img/pic09.jpg' %}" alt="" /></a>
 			<p>Professor 3</p>
 		</article>
 	</div>
