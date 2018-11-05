@@ -196,7 +196,7 @@ def upload_file(request):
         new_note.save()
         new_note.file.save(uploaded_file._get_name(), uploaded_file)
 
-        return HttpResponse("")
+        return render(request,'single-note.html', context = {'note':new_note, 'identity':'S'})
 
     return render(request,'course.html',{})
 

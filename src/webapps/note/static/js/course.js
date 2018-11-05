@@ -18,6 +18,7 @@ function uploadFile(){
                 contentType: false, // tell jquery not to set contentType
                 success: function(data) {
                     $('#exampleModal').modal('hide');
+                    $('#note-list').append(data);
                     console.log($('#exampleModal').html)
                 }
             }); // end ajax
