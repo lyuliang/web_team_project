@@ -7,6 +7,12 @@ function createCourse(){
           if (data.startsWith('<')) {
             $('#exampleModal').modal('hide'); 
             // Add new course to HTML
+            var newcourse  = $(data)
+            if (newcourse.find('#unselected').val() == 'False'){
+                // Delete All Courses, only leave the new added courses
+                $('.posts').empty();
+                $('.posts').append();
+            }
              $('.posts').append(data)
           }
           else {

@@ -133,9 +133,14 @@ def course(request,course_id, identity):
 def create_course(request):
     print('enter create course')
     instructor = get_object_or_404(Professor, username=request.user.username)
-    print('instructor name:',instructor.username)
+    # Find if the prof has created some courses
+    courses = Course.objects.filter(instructor = instructor)
+    unselected = False
+    # Hasn't selected courses yet
+    if len(courses):
+         unselected = True
+    #Create A new Course
     new_course = Course(instructor=instructor)
-    print(request.POST)
     form = CreateCourseForm(request.POST, instance=new_course)
     if not form.is_valid():
         # raise Http404
@@ -149,13 +154,20 @@ def create_course(request):
     else:
         print('no error')
         form.save()
-    return render(request,'single-course.html', context = {'course':new_course, 'identity':'P'})
+    return render(request,'single-course.html',
+        context = {'course':new_course, 'identity':'P','unselected':unselected})
 
 @login_required
 @transaction.atomic
 def join_course(request):
     student = get_object_or_404(Student, username=request.user.username)
     form = JoinCourseForm(request.POST)
+
+    courses = student.course_set.all()
+    unselected = False
+    # Hasn't selected courses yet
+    if len(courses):
+         unselected = True
     if not form.is_valid():
         errors = []
         for error in form.non_field_errors():
@@ -190,8 +202,8 @@ def join_course(request):
     course.students.add(student)
     course.save()
     print(course.students)
-    return render(request,'single-course.html', context = {'course':course, 'identity':'S'})
-
+    return render(request,'single-course.html', \
+            context = {'course':course, 'identity':'S','unselected':unselected})
 @login_required
 @transaction.atomic
 def upload_file(request):

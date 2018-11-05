@@ -8,6 +8,13 @@ function joinCourse(){
           if (data.startsWith('<'))
            {
               $('#exampleModal').modal('hide'); 
+              var newcourse  = $(data)
+              if (newcourse.find('#unselected').val() == 'False'){
+                  // Delete All Courses, only leave the new added courses
+                  $('.posts').empty();
+                  $('.posts').append();
+              }
+
               $('.posts').append(data)
 
           }
