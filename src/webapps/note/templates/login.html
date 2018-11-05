@@ -43,6 +43,7 @@
                  <form class="form-signin" action="{% url 'login'%}" method="POST">
                     {% csrf_token %} 
                   <p class="h3 mb-3 font-weight-normal" id="signin">Please sign in</p>
+                  <p>{% for e in errors %} {{e}} {% endfor %} </p>
                   <input type="username" name = "username" id="username" class="form-control" placeholder="User Name" required autofocus>
                   <input type="password" name = "pw" id="inputPassword" class="form-control" placeholder="Password" required>
                   <div class="checkbox mb-3">
@@ -53,10 +54,11 @@
 
                   </div>
                   <button class="btn btn-lg btn-primary btn-block" type="submit" id="signinbtn">Sign in</button>
+          
                      <p>
                           <a class="register" id="register">Register for Note++</a>
                       </p>
-
+                      
                 </form>
               </div>
             </div>

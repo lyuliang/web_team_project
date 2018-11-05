@@ -38,7 +38,16 @@ class RegisterForm(forms.Form):
         idenity = self.cleaned_data.get('identity')
         if idenity != 'S' and idenity != 'P':
             raise forms.ValidationError("Illegal Identity For User!")
-         # TODO Validation
+        if idenity == 'S':
+            if Student.objects.filter(username = self.cleaned_data['username']).count() > 0:
+                raise forms.ValidationError("Username Already Existed")
+            if Student.objects.filter(andrewid = self.cleaned_data['andrewid']).count() > 0:
+                raise forms.ValidationError("")
+        if idenity == 'P':
+            if Professor.objects.filter(username = self.cleaned_data['username']).count() > 0:
+                raise forms.ValidationError("Username Already Existed")
+            if Professor.objects.filter(andrewid = self.cleaned_data['andrewid']).count() > 0:
+                raise forms.ValidationError("")
         return idenity
 
 class CreateCourseForm(forms.ModelForm):

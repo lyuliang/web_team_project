@@ -11,7 +11,6 @@ from django.core.mail import send_mail
 from django.db import transaction
 import time
 current_milli_time = lambda: int(round(time.time() * 1000))
-# Create your views here.
 
 def logIn(request):
     errors = []
@@ -22,24 +21,27 @@ def logIn(request):
     # Login POST Request
     form = LogInForm(request.POST)
     context['form'] = form
-    if form.is_valid():
+    if 'identity' not in request.POST:
+        context['errors'] = ['Choose Your Identity']
+        return render(request, 'login.html', context)
+    elif form.is_valid():
         identity = form.cleaned_data['identity']
         user = authenticate(username = form.cleaned_data['username'], password = form.cleaned_data['pw'])
         if(not user):
-            errors.append('Anthentication Error!')
-            print('log failure')
+            errors.append('Wrong Password')
             context['errors'] = errors
             return render(request, 'login.html', context)
+        # Login Success
         login(request,user)
         # Redirect to Index page
         print('login success')
-        # return index(request)
-
         return redirect(reverse('index', args=(identity)))
     else: # Form Error
-        print('Form error')
-        print(form.non_field_errors)
-        context['errors'] = ['form_error']
+        for e in form.non_field_errors():
+            context['errors'].append(e)
+        for field in form.visible_fields():
+            for e in field.errors:
+                context['errors'].append(e)
         return render(request, 'login.html', context)
         # error
 
@@ -50,10 +52,11 @@ def register(request):
     form = RegisterForm(request.POST)
     # Error happens, Refreshing Signup Page
     if not form.is_valid():
-        print('-----')
-        context['form'] = form
-        print(form.errors)
-        context['errors'] = ['form_error']
+        for e in form.non_field_errors():
+            context['errors'].append(e)
+        for field in form.visible_fields():
+            for e in field.errors:
+                context['errors'].append(e)
         return render(request, 'login.html', context) 
     # Create a new user according to identity
 
