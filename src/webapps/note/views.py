@@ -117,7 +117,10 @@ def index(request, identity):
 @login_required
 def course(request,course_id, identity):
     context = {}
-    context['identity'] = identity 
+    context['identity'] = identity
+    course = Course.objects.get(id=course_id)
+    context['course_number'] = course.number
+    context['course_name'] = course.name
     return render(request,'course.html',context)
 
 @login_required
@@ -177,15 +180,16 @@ def join_course(request):
 @transaction.atomic
 def upload_file(request):
     if request.method == 'POST':
+        print(request.POST)
         uploaded_file = request.FILES.get('input_file')
         print(type(uploaded_file))
         print(uploaded_file._get_name())
         # form = NoteForm(request.FILES)
         if not uploaded_file:
             return HttpResponse('Must choose a file!')
+
         print('course# current', request.POST.get('course_number'))
-        # course = Course.objects.get(number=request.POST.get('course_number'))
-        course = Course.objects.get(number='17637')
+        course = Course.objects.get(number=request.POST.get('course_number'))
         new_note = Note(author=request.user, course=course, date=datetime.date, time=datetime.time)
         new_note.save()
         new_note.file.save(uploaded_file._get_name(), uploaded_file)

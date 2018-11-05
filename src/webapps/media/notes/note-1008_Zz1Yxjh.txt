@@ -1,0 +1,27 @@
+Introduction to Ajax
+using an XMLHttp request object
+Important methods:
+
+request.open(get/post, url, true/false). true:async, false: sync
+request.send(content)
+
+Important fields:
+request.readyState
+request.onreadystatechange
+request.status     i.e. 404
+request.responseXML
+request.responseText
+
+Also useful:
+JSON parse
+
+function sendRequest() {
+	req = new XMLHttpRequest();
+
+req.onreadystatechange = handleResponse;
+req.open(
+req.send();
+}
+
+function handleResponse() {
+if (req.readState != 4 ||

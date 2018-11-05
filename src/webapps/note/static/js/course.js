@@ -1,12 +1,14 @@
 
 function uploadFile(){
+    // console.log($('#course_number').val())
+    // console.log($('#course_number').html)
+    // console.log($('#course_number').innerText)
+    // console.log($('#course_number').innerHTML)
+    // console.log(document.getElementById("course_number").innerText)
+
     var form_data = new FormData();
     form_data.append('input_file', $('#input_file').get(0).files[0]);
-    console.log($('#course_number').val())
-    console.log($('#course_number').html)
-    console.log($('#course_number').innerText)
-    console.log($('#course_number').innerHTML)
-    form_data.append('course_number', $('#course_number').innerText)
+    form_data.append('course_number', document.getElementById("course_number").innerText)
 
     $.ajax({
                 url:'/note/upload_file/',
