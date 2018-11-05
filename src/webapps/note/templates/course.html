@@ -57,8 +57,6 @@
 	  </li>
 </nav>
 
-
-
 <!-- Wrapper -->
 <div id="wrapper">
 <!-- Main -->
@@ -69,37 +67,20 @@
 				<a href="course.html" class="logo"><strong>Materials</strong> for this course</a>
 			</header>
 <!-- Section -->
+{% for note in notes %}
 <section>
-	<header class="major">
-		<h2>Note 1</h2>
-	</header>
-	<div class="features">
-	</div>
-</section>
-
-<section>
-	<header class="major">
-		<h2>Note 2</h2>
-	</header>
-	<div class="features">
-	</div>
-</section>
-
-<section>
-	<header class="major">
-		<h2>Note 3</h2>
-	</header>
-	<div class="features">
-	</div>
-</section>
-
-<section>
-	<header class="major">
-		<h2>Note 4</h2>
-	</header>
-	<div class="features">
-	</div>
-</section>
+		<header class="major">
+			<h2>{{note.file}}</h2>
+			<h2> {{note.author.username}}</h2>
+		</header>
+		<div class="features">
+				<!-- <ul class="actions"> -->
+			<a href="#" class="button">Edit Note</a>
+					 <!-- </ul> -->
+		</div>
+		
+	</section>
+{% endfor %}
 </div>
 </div>
 
@@ -120,7 +101,7 @@
 	</header>
 	<ul>
 		<li><a href="index_base.html">All Courses</a></li>
-		<li><a href="#" type="button" data-toggle="modal" data-target="#exampleModal">Upload Materials</a></li>
+		<li><a href="#" data-toggle="modal" data-target="#exampleModal">Upload Materials</a></li>
 
       <!-- Modal -->
       {#<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
@@ -128,7 +109,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Create a Course</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Upload Your Note</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

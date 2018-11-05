@@ -119,8 +119,10 @@ def course(request,course_id, identity):
     context = {}
     context['identity'] = identity
     course = Course.objects.get(id=course_id)
+    notes = Note.objects.filter(course = course)
     context['course_number'] = course.number
     context['course_name'] = course.name
+    context['notes'] = notes
     return render(request,'course.html',context)
 
 @login_required

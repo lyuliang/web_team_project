@@ -34,7 +34,7 @@ class Note(models.Model):
     time = models.TimeField(auto_now=True, auto_now_add=False)
     access_type = models.CharField(max_length=20, blank=True, default='public')
     # file = models.FileField(upload_to=directory_path, blank=False, null=False)
-    file = models.FileField(upload_to='notes/', blank=False, null=False)
+    file = models.FileField(upload_to='notes/', blank=False, null=False,default = '')
 
     def __str__(self):
         return self.content +"\n" + self.date + self.time
