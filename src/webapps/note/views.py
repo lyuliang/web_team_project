@@ -136,8 +136,13 @@ def create_course(request):
     form = CreateCourseForm(request.POST, instance=new_course)
     if not form.is_valid():
         # raise Http404
+        errors = []
+        for error in form.non_field_errors():
+            errors.append(error)
+        for field in form.visible_fields():
+            errors.append(field.errors)
         print('error:', form.errors)
-        return HttpResponse(form.errors)
+        return render(request,'errors.html', context = {'errors':errors})
     else:
         print('no error')
         form.save()
@@ -149,8 +154,14 @@ def join_course(request):
     student = get_object_or_404(Student, username=request.user.username)
     form = JoinCourseForm(request.POST)
     if not form.is_valid():
+        errors = []
+        for error in form.non_field_errors():
+            errors.append(error)
+        for field in form.visible_fields():
+            errors.append(field.errors)
         print('error:', form.errors)
-        return HttpResponse(form.errors)
+        return render(request, 'errors.html', context={'errors': errors})
+
     name = form.cleaned_data['name']
     number = form.cleaned_data['number']
     course1 = Course.objects.filter(name=name)
@@ -193,6 +204,7 @@ def upload_file(request):
         print('course# current', request.POST.get('course_number'))
         course = Course.objects.get(number=request.POST.get('course_number'))
         new_note = Note(author=request.user, course=course, date=datetime.date, time=datetime.time)
+        new_note.filename = uploaded_file._get_name()
         new_note.save()
         new_note.file.save(uploaded_file._get_name(), uploaded_file)
 

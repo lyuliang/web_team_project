@@ -50,9 +50,9 @@
 			User name
 		  </button>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				  <li><a  href="login.html">My Note</a></li>
+				  <li><a  href="#">My Note</a></li>
                   <li><a  href="#">Edit Information</a></li>
-                    <li><a  href="login.html">Log out</a></li>
+                    <li><a  href="{% url 'logout'%}">Log out</a></li>
 			  </ul>
 	  </li>
 </nav>
@@ -71,7 +71,7 @@
 {% for note in notes %}
 <section>
 		<header class="major">
-			<h2>{{note.file}}</h2>
+			<h2>{{note.filename}}</h2>
 			<h2> {{note.author.username}}</h2>
 		</header>
 		<div class="features">

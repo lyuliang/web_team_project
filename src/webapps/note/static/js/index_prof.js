@@ -10,8 +10,8 @@ function createCourse(){
              $('.posts').append(data)
           }
           else {
-              // alert(data); //course name或number invalid，显示错误信息
               var errors = $("#errors");
+              console.log(data)
               errors.html(data)
           }
       });
@@ -25,9 +25,6 @@ $(document).ready(function () {
       e.preventDefault();
       createCourse();
   });
-
-  // 开始时显示一遍课程列表
-  // initialCourseList(); //待实现
 
   // CSRF set-up copied from Django docs
   function getCookie(name) {

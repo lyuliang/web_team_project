@@ -35,9 +35,11 @@ class Note(models.Model):
     access_type = models.CharField(max_length=20, blank=True, default='public')
     # file = models.FileField(upload_to=directory_path, blank=False, null=False)
     file = models.FileField(upload_to='notes/', blank=False, null=False,default = '')
+    filename = models.CharField(max_length=300, default='file1')
 
     def __str__(self):
         return self.content +"\n" + self.date + self.time
+
 
     #datetime field
 
