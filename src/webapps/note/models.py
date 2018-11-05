@@ -23,14 +23,22 @@ class Course(models.Model):
     def __str__(self):
         return self.number + self.name
 
+# def directory_path(instance, filename):
+#     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+#     return '{0}/{1}'.format(instance.number, filename)
 
 class Note(models.Model):
-    author = models.ForeignKey(User,on_delete=models.CASCADE) 
-    course = models.ForeignKey(Course,on_delete=models.CASCADE)
+    author = models.ForeignKey(User,on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     date = models.DateField(auto_now=True, auto_now_add=False)
     time = models.TimeField(auto_now=True, auto_now_add=False)
-    access_type = models.CharField(max_length=20, blank = True, default = 'public')
+    access_type = models.CharField(max_length=20, blank=True, default='public')
+    # file = models.FileField(upload_to=directory_path, blank=False, null=False)
+    file = models.FileField(upload_to='notes/', blank=False, null=False)
+
     def __str__(self):
         return self.content +"\n" + self.date + self.time
+
     #datetime field
+
 

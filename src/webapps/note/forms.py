@@ -103,6 +103,21 @@ class JoinCourseForm(forms.Form):
     def clean_name(self):
         return self.cleaned_data.get('name')
 
+# class NoteForm(forms.ModelForm):
+#     class Meta:
+#         model = Note
+#         widgets = {'file': forms.FileInput(),
+#                    }
+#         fields = ['file']
+#
+#     def __init__(self, *args, **kwargs):
+#         super(CreateCourseForm, self).__init__(*args, **kwargs)
+#
+#     def clean_file(self):
+#         file = self.cleaned_data.get('file')
+#         if not file:
+#             raise forms.ValidationError("Must choose a file!")
+#         return file
 
 
 

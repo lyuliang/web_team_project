@@ -173,4 +173,24 @@ def join_course(request):
     print(course.students)
     return render(request,'single-course.html', context = {'course':course, 'identity':'S'})
 
+@login_required
+@transaction.atomic
+def upload_file(request):
+    if request.method == 'POST':
+        uploaded_file = request.FILES.get('input_file')
+        print(type(uploaded_file))
+        print(uploaded_file._get_name())
+        # form = NoteForm(request.FILES)
+        if not uploaded_file:
+            return HttpResponse('Must choose a file!')
+        print('course# current', request.POST.get('course_number'))
+        # course = Course.objects.get(number=request.POST.get('course_number'))
+        course = Course.objects.get(number='17637')
+        new_note = Note(author=request.user, course=course, date=datetime.date, time=datetime.time)
+        new_note.save()
+        new_note.file.save(uploaded_file._get_name(), uploaded_file)
+
+        return HttpResponse("")
+
+    return render(request,'course.html',{})
 
