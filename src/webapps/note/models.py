@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.timezone import make_aware
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 import datetime
 
 class Student(User):
@@ -44,3 +45,10 @@ class Note(models.Model):
     #datetime field
 
 
+class TextNote(models.Model):
+    title = models.CharField(max_length=254, unique=True)
+
+    body = RichTextField()
+
+    def __str__(self):
+        return self.name

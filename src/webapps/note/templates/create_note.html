@@ -1,0 +1,46 @@
+{% extends 'course.html' %}
+{% load static %}
+{% block js %}
+<script src="{% static 'js/create_note.js'%}"></script>
+<script src="//cdn.ckeditor.com/4.5.9/standard/ckeditor.js"></script>
+{% endblock %}
+{% block main %}
+<!-- Main -->
+	<div id="main">
+		<div class="inner">
+		<!-- Header -->
+			<header id="header">
+				<a href="course.html" class="logo"><strong>Create note</strong> for this course</a>
+			</header>
+
+<!-- Section -->
+<div id = "note-list">
+<textarea name="note" id="note" class="ckeditor"></textarea>
+
+        <script type="text/javascript">
+            CKEDITOR.replace( 'note' , {uiColor: '#9AB8F3'});
+        </script>
+<input type="button" name="submit" id="submit" value="submit">
+
+</div>
+</div>
+</div>
+
+{% endblock %}
+ {% block home %}
+
+{% endblock %}
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#    <head>#}
+{#        <meta charset="utf-8">#}
+{#        <title>CKEditor</title>#}
+{#        <script src="//cdn.ckeditor.com/4.5.9/standard/ckeditor.js"></script>#}
+{#    </head>#}
+{#    <body>#}
+{#        <textarea name="editor1"></textarea>#}
+{#        <script>#}
+{#            CKEDITOR.replace( 'editor1' , {uiColor: '#9AB8F3'});#}
+{#        </script>#}
+{#    </body>#}
+{#</html>#}

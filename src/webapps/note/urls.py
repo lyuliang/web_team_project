@@ -14,4 +14,7 @@ urlpatterns = [
     path('create_course/',note.views.create_course,name = 'create_course'),
     path('join_course/',note.views.join_course,name = 'join_course'),
     path('upload_file/', note.views.upload_file, name = 'upload_file'),
+    path('create_note/', note.views.create_note, name = 'create_note'),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
