@@ -40,6 +40,8 @@
               <p class="mb-5">Share your own note, See others' thoughts <br> Ignite your Inspiration, Join
                 <strong>Note++</strong>! <br> Log to your account using the form below!</p>
               <div class="input-group input-group-newsletter">
+
+              {% block form %}
                  <form class="form-signin" action="{% url 'login'%}" method="POST">
                     {% csrf_token %} 
                   <p class="h3 mb-3 font-weight-normal" id="signin">Please sign in</p>
@@ -56,10 +58,13 @@
                   <button class="btn btn-lg btn-primary btn-block" type="submit" id="signinbtn">Sign in</button>
           
                      <p>
-                          <a class="register" id="register">Register for Note++</a>
+                          <a class="register" id="register" href={% url 'register' %}>Register for Note++</a>
                       </p>
                       
                 </form>
+
+              {% endblock %}
+
               </div>
             </div>
           </div>
@@ -72,7 +77,7 @@
      <script src="../../static/js/bootstrap.bundle.min.js"></script>
     <!-- Custom scripts for this template -->
     <script src="../../static/js/coming-soon.min.js"></script>
-    <script src="../../static/js/login.js"></script>
+{#    <script src="../../static/js/login.js"></script>#}
 
   </body>
 

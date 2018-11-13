@@ -1,0 +1,26 @@
+{% extends 'login.html' %}
+{% block form %}
+<form class="form-signin" action="{% url 'register'%}" method="POST">
+                    {% csrf_token %}
+                  <p class="h3 mb-3 font-weight-normal" id="signin">Please fill the form</p>
+                  <p>{% for e in errors %} {{e}} {% endfor %} </p>
+                  <input type="username" name = "username" id="username" class="form-control" placeholder="User Name" required autofocus>
+                  <input type="andrewid" name = "andrewid" id="andrewid" class="form-control" placeholder="Andrew ID" required autofocus>
+
+                  <input type="password" name = "pw" id="inputPassword" class="form-control" placeholder="Password" required>
+                  <input type="password2" name = "pw2" id="inputPassword2" class="form-control" placeholder="Confirm Password" required>
+                  <div class="checkbox mb-3">
+                    <label>
+                      <input type="radio" name = "identity" id="check-student" value="S"> I am a student
+                      <input type="radio" name = "identity" id="check-prof" value="P"> I am a professor
+                    </label>
+
+                  </div>
+                  <button class="btn btn-lg btn-primary btn-block" type="submit" id="signinbtn">Register</button>
+
+                     <p>
+                          <a class="register" id="register" href={% url 'login' %}>Log in</a>
+                      </p>
+
+                </form>
+{% endblock %}

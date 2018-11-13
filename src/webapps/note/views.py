@@ -49,6 +49,9 @@ def register(request):
     errors = []
     context = {}
     context['errors'] = errors
+    if request.method=='GET':
+        return render(request,"register.html",context)
+
     form = RegisterForm(request.POST)
     # Error happens, Refreshing Signup Page
     if not form.is_valid():

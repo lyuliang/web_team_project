@@ -14,6 +14,7 @@
 		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 		<link href="{% static 'css/navbar-top-fixed.css' %}"  rel="stylesheet">
 		<link href="{% static 'css/bootstrap3.3.7.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/index_base.css' %}" rel="stylesheet">
 	</head>
 
 <body class="is-preload">
@@ -30,17 +31,19 @@
 		<a class="nav-link" href="#">My Favor</a>
 	  </li>
 	</ul>
-	  <li class="dropdown">
-		  <button class="btn btn-secondary dropdown-toggle  my-2 my-sm-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+     <div class="dropleft">
+{#       <li class="dropdown">#}
+		  <button class=" btn btn-primary  btn-lg dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			{{request.user.username}}
 		  </button>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				  <li><a class="dropdown-item" href="#">My Note</a></li>
-				  <li><a class="dropdown-item" href="#">Edit Information</a></li>
-				  <li><a class="dropdown-item" href="{% url 'logout'%}">Log out</a></li>
+				  <li><a class=" dropdown-item" href="#">My Note</a></li>
+				  <li><a class=" dropdown-item" href="#">Edit Information</a></li>
+				  <li><a class=" dropdown-item" href="{% url 'logout'%}">Log out</a></li>
 			  </ul>
 	  </li>
-
+     </div>
 </nav>
 
 <!-- Wrapper -->
