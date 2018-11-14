@@ -1,0 +1,33 @@
+.input{
+    /*display:none;*/
+    width:450px;
+    height: 250px;
+    background: #e4b9c0;
+
+    position: absolute;
+    left: 50%;
+    top:50%;
+    margin-left: -175px;
+    margin-top: -150px;
+    padding: 10px;
+
+    /*margin: 10px 0 0 10px;*/
+}
+.label{
+    color: white;
+    font-size: 15px;
+}
+.info{
+     color: black;
+    font-size: 15px;
+}
+#over{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background: #000;
+    opacity: 0.5;
+    display: none;
+}

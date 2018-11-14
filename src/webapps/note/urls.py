@@ -16,5 +16,7 @@ urlpatterns = [
     path('upload_file/', note.views.upload_file, name = 'upload_file'),
     path('create_note/', note.views.create_note, name = 'create_note'),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    path('upload_note/', note.views.upload_note, name = 'upload_note'),
+
 
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -9,7 +9,7 @@ from note.forms import *
 from mimetypes import guess_type
 from django.core.mail import send_mail
 from django.db import transaction
-import time
+import time,os
 current_milli_time = lambda: int(round(time.time() * 1000))
 
 def logIn(request):
@@ -240,3 +240,27 @@ def create_note(request):
         # context['course_number'] = course.number
         # context['course_name'] = course.name
         return render(request, 'create_note.html', context)
+
+@login_required
+@transaction.atomic
+def upload_note(request):
+    context = {}
+    if request.method=='GET':
+        print("enter")
+        path=request.GET['filePath']
+        info = request.GET['fileinfo']
+
+        # if not name:
+        #     return HttpResponse("no notes for upload!")
+        # print(path+"\n")
+        fd= open(path, 'a+')
+        # print("finish11\n")
+        fd.write(info)
+        # print("finish22\n")
+        fd.close()
+        # print("finish")
+        # destination = open(os.path.join(path, name), 'wb+')
+        # destination.write(info)
+        # destination.close()
+        return HttpResponse("upload over!")
+
