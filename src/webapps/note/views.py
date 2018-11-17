@@ -321,8 +321,10 @@ def upload_note(request):
         print("hhh"+course.number)
         new_note = TextNote(course=course,filepath=path,filename=filename)
         new_note.body=info
+        new_note.plaintext = info
         new_note.save()
         print(new_note.body)
+        print(new_note.plaintext)
 
         # if not name:
         #     return HttpResponse("no notes for upload!")

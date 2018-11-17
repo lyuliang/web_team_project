@@ -1,3 +1,5 @@
+import sys
+
 from ckeditor.fields import RichTextField
 from django.db import models
 from django.utils.timezone import make_aware
@@ -51,6 +53,7 @@ class TextNote(models.Model):
     filepath=models.CharField(max_length=200)
     filename=models.CharField(max_length=200)
     body = RichTextField()
+    plaintext = models.CharField(max_length=sys.maxsize, blank=True, default='')
 
     def __str__(self):
         return self.filename

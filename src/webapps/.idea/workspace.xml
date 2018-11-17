@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d96ff775-7f5a-4d1d-99c9-e44ce48c175c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/media/textNote/charlotte-ziyiynote.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/textNote/charlotte-ziyiynote.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/note/templates/student_portal.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sprint-backlogs/Sprint 2 Backlog.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../../sprint-backlogs/Sprint 2 Backlog.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/note/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/note/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/note/static/js/index_student.js" beforeDir="false" afterPath="$PROJECT_DIR$/note/static/js/index_student.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/note/templates/course.html" beforeDir="false" afterPath="$PROJECT_DIR$/note/templates/course.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/note/templates/create_note.html" beforeDir="false" afterPath="$PROJECT_DIR$/note/templates/create_note.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/note/templates/index_prof.html" beforeDir="false" afterPath="$PROJECT_DIR$/note/templates/index_prof.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/note/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/note/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/note/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/note/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/note/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/note/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/note/static/js/create_note.js" beforeDir="false" afterPath="$PROJECT_DIR$/note/static/js/create_note.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/note/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/note/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -103,7 +94,7 @@
         <counts>
           <entry key="html" value="835" />
           <entry key="js" value="1435" />
-          <entry key="py" value="3267" />
+          <entry key="py" value="3287" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -111,7 +102,7 @@
           <entry key="HTML" value="819" />
           <entry key="JavaScript" value="1435" />
           <entry key="PLAIN_TEXT" value="16" />
-          <entry key="Python" value="3267" />
+          <entry key="Python" value="3287" />
         </counts>
       </usages-collector>
     </session>
@@ -201,11 +192,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/note/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="311" column="22" selection-start-line="311" selection-start-column="22" selection-end-line="311" selection-end-column="22" />
+            <state relative-caret-position="318">
+              <caret line="319" column="39" selection-start-line="319" selection-start-column="39" selection-end-line="319" selection-end-column="39" />
               <folding>
                 <element signature="e#0#62#0" expanded="true" />
-                <marker date="1542492045616" expanded="true" signature="12234:12239" ph="..." />
+                <marker date="1542495915447" expanded="true" signature="12302:12307" ph="..." />
               </folding>
             </state>
           </provider>
@@ -226,8 +217,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/note/static/js/create_note.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="37" column="36" selection-start-line="37" selection-start-column="36" selection-end-line="37" selection-end-column="36" />
+            <state relative-caret-position="120">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -235,7 +226,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/note/templates/pdf.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="-231">
               <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
               <folding>
                 <element signature="e#567#573#0#HTML" expanded="true" />
@@ -287,10 +278,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/note/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="524">
-              <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+            <state relative-caret-position="669">
+              <caret line="55" column="31" lean-forward="true" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
               <folding>
-                <element signature="e#0#41#0" expanded="true" />
+                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -334,9 +325,9 @@
       <find>see</find>
       <find>ckeditor</find>
       <find>filePath</find>
-      <find>posts</find>
       <find>course_</find>
       <find>PDFJS</find>
+      <find>posts</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -373,11 +364,11 @@
         <option value="$PROJECT_DIR$/note/templates/index_student.html" />
         <option value="$PROJECT_DIR$/note/static/js/index_student.js" />
         <option value="$PROJECT_DIR$/note/templates/pdf.html" />
-        <option value="$PROJECT_DIR$/note/models.py" />
-        <option value="$PROJECT_DIR$/note/static/js/create_note.js" />
-        <option value="$PROJECT_DIR$/note/views.py" />
         <option value="$PROJECT_DIR$/note/urls.py" />
         <option value="$PROJECT_DIR$/note/templates/course.html" />
+        <option value="$PROJECT_DIR$/note/models.py" />
+        <option value="$PROJECT_DIR$/note/views.py" />
+        <option value="$PROJECT_DIR$/note/static/js/create_note.js" />
       </list>
     </option>
   </component>
@@ -761,30 +752,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/note/templates/index_student.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="46" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/note/templates/index_base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1547">
-          <caret line="91" column="28" selection-start-line="91" selection-start-column="28" selection-end-line="91" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/note/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/note/static/js/index_student.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1000">
@@ -804,19 +771,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/note/templates/pdf.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state relative-caret-position="-231">
           <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
           <folding>
             <element signature="e#567#573#0#HTML" expanded="true" />
             <element signature="e#574#580#0#HTML" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/note/static/js/create_note.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="37" column="36" selection-start-line="37" selection-start-column="36" selection-end-line="37" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -830,13 +790,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/note/templates/index_base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1547">
+          <caret line="91" column="28" selection-start-line="91" selection-start-column="28" selection-end-line="91" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/note/templates/index_student.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="46" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/note/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="669">
+          <caret line="55" column="31" lean-forward="true" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/note/static/js/create_note.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/note/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="311" column="22" selection-start-line="311" selection-start-column="22" selection-end-line="311" selection-end-column="22" />
+        <state relative-caret-position="318">
+          <caret line="319" column="39" selection-start-line="319" selection-start-column="39" selection-end-line="319" selection-end-column="39" />
           <folding>
             <element signature="e#0#62#0" expanded="true" />
-            <marker date="1542492045616" expanded="true" signature="12234:12239" ph="..." />
+            <marker date="1542495915447" expanded="true" signature="12302:12307" ph="..." />
           </folding>
         </state>
       </provider>
