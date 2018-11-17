@@ -14,7 +14,8 @@ urlpatterns = [
     path('create_course/',note.views.create_course,name = 'create_course'),
     path('join_course/',note.views.join_course,name = 'join_course'),
     path('upload_file/', note.views.upload_file, name = 'upload_file'),
-    path('create_note/', note.views.create_note, name = 'create_note'),
+    path('create_note/<str:identity>', note.views.create_note, name = 'create_note'),
+    path('all_courses/<str:identity>', note.views.all_courses, name = 'all_courses'),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     path('upload_note/', note.views.upload_note, name = 'upload_note'),
 

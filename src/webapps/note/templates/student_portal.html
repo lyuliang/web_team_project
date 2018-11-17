@@ -1,0 +1,60 @@
+{% extends "index_base.html" %}
+{% block courses %}
+{% load static %}
+<article>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+        Join Course
+      </button>
+  <!-- Modal -->
+  {#<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+  <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Join a Course</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="form-signin" method="POST">
+                    <p class="h3 mb-3 font-weight-normal" id="signin">Please fill in course name or number to join a course</p>
+                    <div id="errors" ></div>
+  
+                    <input type="text" name = "course_name" id="course_name" class="form-control" placeholder="Course Name" autofocus>
+                    <input type="text" name = "course_number" id="course_number" class="form-control" placeholder="Course Number (5 digits)" maxlength="5">
+  
+                    <button class="btn" type="button" id="join_course">Join</button>
+                    {% csrf_token %}
+                  </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </article>
+<div class="posts">
+
+    {% for course in courses %}
+    <article>
+        <a href="{% url 'course' course.id identity %}" class="image"><img src="../../static/img/pic01.jpg" alt="" /></a>
+        <h3>{{course.number}}</h3>
+        <p>{{course.name}}</p>
+        <ul class="actions">
+          <li><a href="{% url 'course' course.id identity %}" class="button">See Notes</a></li>
+        </ul>
+    </article>
+    {% endfor %}
+
+
+
+
+            </div>
+{% endblock %}
+{% block js %}
+<script src="{% static 'js/index_student.js'%}"></script>
+
+{% endblock %}

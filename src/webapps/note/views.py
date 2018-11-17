@@ -232,14 +232,24 @@ def upload_file(request):
 
 @login_required
 @transaction.atomic
-def create_note(request):
+def create_note(request,identity):
     context = {}
     if request.method=='GET':
-        # context['identity'] = identity
+        context['identity'] = identity
         # course = Course.objects.get(id=course_id)
         # context['course_number'] = course.number
         # context['course_name'] = course.name
         return render(request, 'create_note.html', context)
+
+@login_required
+def all_courses(request, identity):
+    context = {}
+    context['identity'] = identity
+    context['courses'] = Course.objects.all()
+    if identity == 'S':
+        return render(request, 'index_student.html', context)
+    else:
+        return render(request, 'index_prof.html', context)
 
 @login_required
 @transaction.atomic
