@@ -18,6 +18,7 @@ urlpatterns = [
     path('all_courses/<str:identity>', note.views.all_courses, name = 'all_courses'),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     path('upload_note/', note.views.upload_note, name = 'upload_note'),
+    path('dropdown_courselist/', note.views.dropdown_courselist, name='dropdown_courselist'),
 
 
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
