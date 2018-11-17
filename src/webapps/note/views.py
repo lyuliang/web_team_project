@@ -263,6 +263,9 @@ def all_courses(request, identity):
     context['identity'] = identity
     context['courses'] = Course.objects.all()
     if identity == 'S':
+
+        student = get_object_or_404(Student, username=request.user.username)
+        context['cschosen'] = student.course_set.all()
         return render(request, 'student_portal.html', context)
     else:
         context['form'] = CreateCourseForm()
