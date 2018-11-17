@@ -3,7 +3,7 @@
 {% load static %}
 <article>
     <!-- Button trigger modal -->
-    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" onclick="dropdown_courselist()">
         Join Course
       </button>
   <!-- Modal -->
@@ -13,7 +13,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Join a Course</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" id="join_course_button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -22,7 +22,13 @@
                     <p class="h3 mb-3 font-weight-normal" id="signin">Please fill in course name or number to join a course</p>
                     <div id="errors" ></div>
   
-                    <input type="text" name = "course_name" id="course_name" class="form-control" placeholder="Course Name" autofocus>
+                    <input type="text" name = "course_name" id="course_name" class="form-control" placeholder="Course Name" autofocus list="category">
+
+                    <datalist id="category">
+{#                           <option value="example coursename">#}
+                      </datalist>
+
+
                     <input type="text" name = "course_number" id="course_number" class="form-control" placeholder="Course Number (5 digits)" maxlength="5">
   
                     <button class="btn" type="button" id="join_course">Join</button>

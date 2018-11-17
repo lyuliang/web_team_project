@@ -15,6 +15,18 @@
 		<link href="{% static 'css/navbar-top-fixed.css' %}"  rel="stylesheet">
 		<link href="{% static 'css/bootstrap3.3.7.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/index_base.css' %}" rel="stylesheet">
+
+        <!-- Scripts -->
+
+<script src ="{% static 'js/jquery.min.js'%}"></script>
+<script src="{% static 'js/browser.min.js'%}"></script>
+<script src="{% static 'js/breakpoints.min.js'%}"></script>
+<script src="{% static 'js/util.js'%}"></script>
+<script src="{% static 'js/main.js'%}"></script>
+<script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+
+    {% block js %}{% endblock %}
 	</head>
 
 <body class="is-preload">
@@ -93,17 +105,7 @@
   </div>
 </div>
 
-<!-- Scripts -->
 
-<script src ="{% static 'js/jquery.min.js'%}"></script>
-<script src="{% static 'js/browser.min.js'%}"></script>
-<script src="{% static 'js/breakpoints.min.js'%}"></script>
-<script src="{% static 'js/util.js'%}"></script>
-<script src="{% static 'js/main.js'%}"></script>
-<script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
-<script src="{% static 'js/bootstrap.min.js'%}"></script>
-
-    {% block js %}{% endblock %}
 
 	</body>
 </html>

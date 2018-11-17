@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from django.http import HttpResponse,Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout,tokens
@@ -264,3 +264,10 @@ def upload_note(request):
         # destination.close()
         return HttpResponse("upload over!")
 
+def dropdown_courselist(request):
+    courses = Course.objects.all()
+    courselist = []
+    for course in courses:
+        courselist.append(course.name)
+    print(courselist)
+    return JsonResponse(courselist, safe=False)

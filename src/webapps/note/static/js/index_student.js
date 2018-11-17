@@ -30,6 +30,17 @@ function joinCourse(){
       });
 }
 
+function dropdown_courselist() {
+    var courselist = $("#category");
+    $.get("/note/dropdown_courselist/")
+        .done(function(data) {
+            courselist.html('')
+            for (var i = 0; i < data.length; i ++) {
+                courselist.append($("<option>").attr('value', data[i]))
+            }
+        });
+}
+
 $(document).ready(function () {
   console.log("good")
   // Add event-handlers
