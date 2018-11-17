@@ -242,13 +242,30 @@ def create_note(request,identity):
         return render(request, 'create_note.html', context)
 
 @login_required
+@transaction.atomic
+def save_choice(request,identity):
+    context = {}
+    print (request.POST)
+    context['identity'] = identity
+    courses  = Course.objects.all()
+    student = get_object_or_404(Student, username=request.user.username)
+    for c in courses:
+        if request.POST[c.number + 'chosen'] == 'T':
+            c.students.add(student)
+        elif request.POST[c.number + 'chosen'] == 'F':
+            c.students.remove(student)
+    return render(request, 'create_note.html', context)
+
+
+@login_required
 def all_courses(request, identity):
     context = {}
     context['identity'] = identity
     context['courses'] = Course.objects.all()
     if identity == 'S':
-        return render(request, 'index_student.html', context)
+        return render(request, 'student_portal.html', context)
     else:
+        context['form'] = CreateCourseForm()
         return render(request, 'index_prof.html', context)
 
 @login_required
@@ -259,7 +276,6 @@ def upload_note(request):
         print("enter")
         path=request.GET['filePath']
         info = request.GET['fileinfo']
-
         # if not name:
         #     return HttpResponse("no notes for upload!")
         # print(path+"\n")

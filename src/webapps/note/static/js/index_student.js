@@ -49,6 +49,16 @@ $(document).ready(function () {
       e.preventDefault();
       joinCourse();
   });
+  $('.btn-join').click(function (e) {
+    e.preventDefault();
+    $(this).parent().parent().find('#chosen').val('T');
+    $(this).css('background-color','#f16615');
+    });
+   $('.btn-cancel').click(function (e) {
+    e.preventDefault();
+    $(this).parent().parent().find('#chosen').val('F');
+    $(this).parent().parent().find('.btn-join').css('background-color','#d9534f');
+    });
 
   // CSRF set-up copied from Django docs
   function getCookie(name) {
