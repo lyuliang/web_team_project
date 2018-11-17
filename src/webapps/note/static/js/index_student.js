@@ -39,9 +39,19 @@ function dropdown_courselist() {
                 courselist.append($("<option>").attr('value', data[i]))
             }
         });
+
 }
 
 $(document).ready(function () {
+
+    var app = new annotator.App();
+    app.include(annotator.ui.main);
+    app.include(annotator.storage.http);
+    app
+    .start()
+    .then(function () {
+         app.annotations.load();
+    });
   console.log("good")
   // Add event-handlers
 

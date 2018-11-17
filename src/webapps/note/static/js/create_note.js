@@ -28,11 +28,14 @@ $(document).ready(function () {
      var file=username+"-"+filename;
      var filePath = folder+file;
      var fileinfo=note;
-
+    var course=document.getElementById("course_number").innerText;
+    console.log(course)
        $.get("/note/upload_note/",
            {
                filePath:filePath,
-               fileinfo:fileinfo
+               fileinfo:fileinfo,
+               filename:file,
+               course_number:course,
            },
            function (data) {
            alert("success");

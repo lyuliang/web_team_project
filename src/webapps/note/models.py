@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.db import models
 from django.utils.timezone import make_aware
 from django.contrib.auth.models import User
@@ -45,10 +46,11 @@ class Note(models.Model):
     #datetime field
 
 
-# class TextNote(models.Model):
-#     title = models.CharField(max_length=254, unique=True)
-#
-#     body = RichTextField()
-#
-#     def __str__(self):
-#         return self.name
+class TextNote(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    filepath=models.CharField(max_length=200)
+    filename=models.CharField(max_length=200)
+    body = RichTextField()
+
+    def __str__(self):
+        return self.filename

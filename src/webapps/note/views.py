@@ -232,14 +232,48 @@ def upload_file(request):
 
 @login_required
 @transaction.atomic
-def create_note(request):
+def create_note(request, course_number):
     context = {}
     if request.method=='GET':
         # context['identity'] = identity
         # course = Course.objects.get(id=course_id)
         # context['course_number'] = course.number
         # context['course_name'] = course.name
+        context['course_number'] = course_number
+        course = Course.objects.get(number=course_number)
+        context['course_name'] = course.name
         return render(request, 'create_note.html', context)
+        # return render(request, 'pdf.html', context)
+
+# @login_required
+# @transaction.atomic
+# def upload_note(request):
+#     context = {}
+#     if request.method=='GET':
+#         print("enter")
+#         path=request.GET['filePath']
+#         info = request.GET['fileinfo']
+#
+#         # if not name:
+#         #     return HttpResponse("no notes for upload!")
+#         # print(path+"\n")
+#         fd= open(path, 'a+')
+#         # print("finish11\n")
+#         fd.write(info)
+#         # print("finish22\n")
+#         fd.close()
+#         # print("finish")
+#         # destination = open(os.path.join(path, name), 'wb+')
+#         # destination.write(info)
+#         # destination.close()
+#
+#         new_note = TextNote(author=request.user, course=course, date=datetime.date, time=datetime.time)
+#         new_note.filename = uploaded_file._get_name()
+#         new_note.save()
+#         new_note.file(upload_file = '')
+#         new_note.file.save(uploaded_file._get_name(), uploaded_file)
+#
+#         return HttpResponse("upload over!")
 
 @login_required
 @transaction.atomic
@@ -247,16 +281,22 @@ def upload_note(request):
     context = {}
     if request.method=='GET':
         print("enter")
-        path=request.GET['filePath']
-        info = request.GET['fileinfo']
-
+        path=request.GET.get('filePath')
+        info = request.GET.get('fileinfo')
+        filename=request.GET.get('filename')
+        course_number=request.GET.get('course_number')
+        print("hehe"+course_number)
+        course = Course.objects.get(number=course_number)
+        print("hhh"+course.number)
+        new_note = TextNote(course=course,filepath=path,filename=filename)
+        new_note.body=info
+        new_note.save()
+        print(new_note.body)
         # if not name:
         #     return HttpResponse("no notes for upload!")
         # print(path+"\n")
         fd= open(path, 'a+')
-        # print("finish11\n")
         fd.write(info)
-        # print("finish22\n")
         fd.close()
         # print("finish")
         # destination = open(os.path.join(path, name), 'wb+')
