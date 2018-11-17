@@ -41,7 +41,7 @@
 <div class="posts">
 {% for course in courses %}
 <article>
-	<a href="{% url 'course' course.id identity %}" class="image"><img src="../../static/img/pic01.jpg" alt="" /></a>
+	<a href="{% url 'course' course.id identity %}" class="image"><img src="../../static/img/pic08.jpg" alt="" /></a>
 	<h3>{{course.number}}</h3>
 	<p>{{course.name}}</p>
 	<ul class="actions">
@@ -50,9 +50,6 @@
 </article>
 {% endfor %}
 
-
-
-
 
             </div>
 {% endblock %}

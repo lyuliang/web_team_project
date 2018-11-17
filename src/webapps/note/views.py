@@ -232,10 +232,10 @@ def upload_file(request):
 
 @login_required
 @transaction.atomic
-def create_note(request, course_number):
+def create_note(request, course_number, identity):
     context = {}
     if request.method=='GET':
-        # context['identity'] = identity
+        context['identity'] = identity
         # course = Course.objects.get(id=course_id)
         # context['course_number'] = course.number
         # context['course_name'] = course.name
@@ -277,10 +277,41 @@ def create_note(request, course_number):
 
 @login_required
 @transaction.atomic
+def save_choice(request,identity):
+    context = {}
+    print (request.POST)
+    context['identity'] = identity
+    courses  = Course.objects.all()
+    student = get_object_or_404(Student, username=request.user.username)
+    for c in courses:
+        if request.POST[c.number + 'chosen'] == 'T':
+            c.students.add(student)
+        elif request.POST[c.number + 'chosen'] == 'F':
+            c.students.remove(student)
+    return render(request, 'create_note.html', context)
+
+
+@login_required
+def all_courses(request, identity):
+    context = {}
+    context['identity'] = identity
+    context['courses'] = Course.objects.all()
+    if identity == 'S':
+
+        student = get_object_or_404(Student, username=request.user.username)
+        context['cschosen'] = student.course_set.all()
+        return render(request, 'student_portal.html', context)
+    else:
+        context['form'] = CreateCourseForm()
+        return render(request, 'index_prof.html', context)
+
+@login_required
+@transaction.atomic
 def upload_note(request):
     context = {}
     if request.method=='GET':
         print("enter")
+
         path=request.GET.get('filePath')
         info = request.GET.get('fileinfo')
         filename=request.GET.get('filename')
@@ -292,6 +323,7 @@ def upload_note(request):
         new_note.body=info
         new_note.save()
         print(new_note.body)
+
         # if not name:
         #     return HttpResponse("no notes for upload!")
         # print(path+"\n")

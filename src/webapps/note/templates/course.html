@@ -111,7 +111,7 @@
 		<h2>Menu</h2>
 	</header>
 	<ul>
-		<li><a href="index_base.html">All Courses</a></li>
+		<li><a href="{% url 'all_courses' identity %}">All Courses</a></li>
 		<li><a href="#" data-toggle="modal" data-target="#exampleModal">Upload Materials</a></li>
 
       <!-- Modal -->
@@ -144,11 +144,8 @@
         </div>
       </div>
 
+        <li><a href="{%url 'create_note' course_number identity %}">Create Notes</a ></li>
 
-
-
-{#		<li><a href={% url 'create_note' %}>Create Notes</a></li>#}
-        <li><a href="{%url 'create_note' course_number %}">Create Notes</a ></li>
 		<li>
 			<span class="opener">Q & A</span>
 			<ul>
