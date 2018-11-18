@@ -12,6 +12,7 @@ from mimetypes import guess_type
 from django.core.mail import send_mail
 from django.db import transaction
 import time,os,io
+from wsgiref.util import FileWrapper
 current_milli_time = lambda: int(round(time.time() * 1000))
 
 def logIn(request):
@@ -136,6 +137,29 @@ def course(request, course_id, identity):
     context['textnotes'] = textnotes
     return render(request,'course.html',context)
 
+@login_required
+def download_txt(request, note_name):
+    path = './media/textNote/';
+    os.path.expanduser(path)
+    print(path + note_name)
+    file = open(path + note_name,"rb")
+    response = HttpResponse(FileWrapper(file), content_type=guess_type(note_name))
+   # response['Content-Length'] = os.path.getsize(note_name)
+    response['Content-Disposition'] = "attachment; filename=" + note_name
+    return response
+
+@login_required
+@transaction.atomic   
+def download_pdf(request, note_name):
+    path = './media/notes/';
+    os.path.expanduser(path)
+    print(path + note_name)
+    file = open(path + note_name,"rb")
+    response = HttpResponse(FileWrapper(file), content_type=guess_type(note_name))
+   # response['Content-Length'] = os.path.getsize(note_name)
+    response['Content-Disposition'] = "attachment; filename=" + note_name
+    return response
+    
 @login_required
 @transaction.atomic
 def create_course(request):
