@@ -323,19 +323,14 @@ def upload_note(request):
         filename=request.GET.get('filename')
         course_number=request.GET.get('course_number')
         identity = request.GET.get('identity')
-        print("hehe"+course_number)
+
         course = Course.objects.get(number=course_number)
-        print("hhh"+course.number)
+
         new_note = TextNote(author=request.user, course=course,filepath=path,filename=filename)
         new_note.body=info
         new_note.plaintext = info
         new_note.save()
-        print(new_note.body)
-        print(new_note.plaintext)
 
-        # if not name:
-        #     return HttpResponse("no notes for upload!")
-        # print(path+"\n")
         fd= open(path, 'a+')
         fd.write(info)
         fd.close()
@@ -357,9 +352,18 @@ def dropdown_courselist(request):
 
 @login_required
 @transaction.atomic
-def get_text_note(request, note_id):
+def get_text_note(request, note_id,course_id,identity):
+
     context = {}
+    context['identity'] = identity
+    course = Course.objects.get(id=course_id)
+    textnotes = TextNote.objects.get(id=note_id)
+    context['course_number'] = course.number
+    context['course_id'] = course.id
+    context['course_name'] = course.name
+    context['textnotes'] = textnotes.body
     return render(request, 'create_note.html', context)
+
 
 @login_required
 @transaction.atomic
