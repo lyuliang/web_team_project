@@ -159,7 +159,7 @@ def download_pdf(request, note_name):
    # response['Content-Length'] = os.path.getsize(note_name)
     response['Content-Disposition'] = "attachment; filename=" + note_name
     return response
-    
+
 @login_required
 @transaction.atomic
 def create_course(request):

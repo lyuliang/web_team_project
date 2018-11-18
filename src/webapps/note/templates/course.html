@@ -83,15 +83,10 @@
 <section>
 		<header class="major">
 			<img src="{% static 'img/txt.png' %}" style="height:100px; width:100px"> 
-<<<<<<< HEAD
-			<a href="{% url 'get_text_note' note.id %}"><h2>{{note.filename}}
+			<a href="{% url 'get_text_note' note.id course_id identity%}"><h2>{{note.filename}}
 					<a href="{% url 'download_txt' note.filename %}"><button class="btn btn-default">Download</button></a>
 			</h2></a>
 			<p> Author : <em>{{note.author.username}}</em></p>
-=======
-			<a href="{% url 'get_text_note' note.id course_id identity  %}"><h2>{{note.filename}}</h2></a>
-			<h2> {{note.author.username}}</h2>
->>>>>>> 9638e65119bbe8bb17ebfe9a37aa1d020d975529
 		</header>
 		<div class="features">
 			<!-- <a href="#" class="button">Edit Note</a>
