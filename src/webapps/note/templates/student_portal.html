@@ -12,10 +12,11 @@
         <h3>{{course.number}}</h3>
         <p>{{course.name}}</p>
         <ul class="actions">
-          <input type = "hidden" id = "chosen" name = "{{course.number}}chosen" value = "F">
           {% if course in cschosen %}
+              <input type = "hidden" id = "chosen" name = "{{course.number}}chosen" value = "T">
           <li><button class="btn btn-danger btn-join" style="background-color:rgb(241, 102, 21)">Joined</button></li>
           {% else %}
+              <input type = "hidden" id = "chosen" name = "{{course.number}}chosen" value = "F">
           <li><button class="btn btn-danger btn-join" style="background-color:#d9534f">Join In</button></li>
           {% endif %}
           <li><button class="btn btn-danger btn-cancel">Cancel</button></li>

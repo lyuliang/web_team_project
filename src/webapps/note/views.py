@@ -294,7 +294,7 @@ def save_choice(request,identity):
             c.students.add(student)
         elif request.POST[c.number + 'chosen'] == 'F':
             c.students.remove(student)
-    return render(request, 'create_note.html', context)
+    return redirect(reverse('index', args=(identity)))
 
 
 @login_required
@@ -365,6 +365,10 @@ def get_text_note(request, note_id):
 @transaction.atomic
 def get_pdf(request, note_id):
     context = {}
+    note = Note.objects.get(id=note_id)
+    context['file_url'] = note.file.url
+    context['filename'] = note.filename[:-4]
+    context['author'] = request.user.username
     return render(request, 'pdf.html', context)
 
 @login_required

@@ -23,4 +23,4 @@ urlpatterns = [
     path('', note.views.logIn),
     path('admin/', admin.site.urls),
     path('note/', include('note.urls')),
-] 
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
