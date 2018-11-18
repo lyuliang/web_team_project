@@ -1,136 +1,103 @@
-{% extends 'course.html' %}
-{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Note++ - View Note</title>
+    {% load static %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+	<link href="{% static 'css/pdfannotate.css' %}" rel="stylesheet">
 
- {% block css %}
-     <link href="{% static 'css/create_note.css' %}" rel="stylesheet">
-       {% endblock %}
-{% block js %}
-<script src="{% static 'js/pdf.js'%}"></script>
-    <script src="{% static 'js/pdf.worker.js'%}"></script>
-<script src="//cdn.ckeditor.com/4.5.9/standard/ckeditor.js"></script>
-<script src="https://cdn.bootcss.com/FileSaver.js/2014-11-29/FileSaver.js"></script>
-{% endblock %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.328/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.22/fabric.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
 
-{% block main %}
-<!-- Main -->
-<div>
-    <button id="prev">Previous</button>
-    <button id="next">Next</button>
-    &nbsp; &nbsp;
-    <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+    <script src="{% static 'js/arrow.fabric.js'%}"></script>
+    <script src="{% static 'js/pdfannotate.js'%}"></script>
+    <script src="{% static 'js/pdfscript.js'%}"></script>
+</head>
+<body>
+<div class="toolbar">
+	<div class="tool">
+        <span id="filename">{{ filename }}</span>
+        <div id="file_url" style="display: none;">{{ file_url }}</div>
+        <div id="author" style="display: none;">{{ author }}</div>
+	</div>
+
+	<div class="tool">
+		<label for="">Brush size</label>
+		<input type="number" class="form-control text-right" value="1" id="brush-size" max="50">
+	</div>
+	<div class="tool">
+		<label for="">Font size</label>
+		<select id="font-size" class="form-control">
+			<option value="10">10</option>
+			<option value="12">12</option>
+			<option value="16" selected>16</option>
+			<option value="18">18</option>
+			<option value="24">24</option>
+			<option value="32">32</option>
+			<option value="48">48</option>
+			<option value="64">64</option>
+			<option value="72">72</option>
+			<option value="108">108</option>
+		</select>
+	</div>
+	<div class="tool">
+		<button class="color-tool active" style="background-color: #212121;"></button>
+		<button class="color-tool" style="background-color: red;"></button>
+		<button class="color-tool" style="background-color: blue;"></button>
+		<button class="color-tool" style="background-color: green;"></button>
+		<button class="color-tool" style="background-color: yellow;"></button>
+	</div>
+	<div class="tool">
+		<button class="tool-button active"><i class="fa fa-hand-paper-o" title="Free Hand" onclick="enableSelector(event)"></i></button>
+	</div>
+	<div class="tool">
+		<button class="tool-button"><i class="fa fa-pencil" title="Pencil" onclick="enablePencil(event)"></i></button>
+	</div>
+	<div class="tool">
+		<button class="tool-button"><i class="fa fa-font" title="Add Text" onclick="enableAddText(event)"></i></button>
+	</div>
+	<div class="tool">
+		<button class="tool-button"><i class="fa fa-long-arrow-right" title="Add Arrow" onclick="enableAddArrow(event)"></i></button>
+	</div>
+	<div class="tool">
+		<button class="btn btn-danger btn-sm" onclick="deleteSelectedObject(event)"><i class="fa fa-trash"></i></button>
+	</div>
+	<div class="tool">
+		<button class="btn btn-danger btn-sm" onclick="clearPage()">Clear Page</button>
+	</div>
+	<div class="tool">
+		<button class="btn btn-info btn-sm" onclick="showPdfData()">{}</button>
+	</div>
+	<div class="tool">
+		<button class="btn btn-light btn-sm" onclick="savePDF()"><i class="fa fa-save"></i> Save</button>
+	</div>
+</div>
+<div id="pdf-container"></div>
+
+<div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="dataModalLabel">PDF annotation data</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<pre class="prettyprint lang-json linenums">
+				</pre>
+			</div>
+		</div>
+	</div>
 </div>
 
-<canvas id="the-canvas"></canvas>
-
-<script>
-    var url = '/Users/lyuliangliu/Documents/17637/Team48/src/webapps/media/notes/IO.pdf';
-
-    var pdfDoc = null,
-        pageNum = 1,
-        pageRendering = false,
-        pageNumPending = null,
-        scale = 0.8,
-        canvas = document.getElementById('the-canvas'),
-        ctx = canvas.getContext('2d');
-
-    /**
-     * Get page info from document, resize canvas accordingly, and render page.
-     * @param num Page number.
-     */
-    function renderPage(num) {
-        pageRendering = true;
-        // Using promise to fetch the page
-        pdfDoc.getPage(num).then(function(page) {
-            var viewport = page.getViewport(scale);
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-
-            // Render PDF page into canvas context
-            var renderContext = {
-                canvasContext: ctx,
-                viewport: viewport
-            };
-            var renderTask = page.render(renderContext);
-
-            // Wait for rendering to finish
-            renderTask.promise.then(function() {
-                pageRendering = false;
-                if (pageNumPending !== null) {
-                    // New page rendering is pending
-                    renderPage(pageNumPending);
-                    pageNumPending = null;
-                }
-            });
-        });
-
-        // Update page counters
-        document.getElementById('page_num').textContent = num;
-    }
-
-    /**
-     * If another page rendering in progress, waits until the rendering is
-     * finised. Otherwise, executes rendering immediately.
-     */
-    function queueRenderPage(num) {
-        if (pageRendering) {
-            pageNumPending = num;
-        } else {
-            renderPage(num);
-        }
-    }
-
-    /**
-     * Displays previous page.
-     */
-    function onPrevPage() {
-        if (pageNum <= 1) {
-            return;
-        }
-        pageNum--;
-        queueRenderPage(pageNum);
-    }
-    document.getElementById('prev').addEventListener('click', onPrevPage);
-
-    /**
-     * Displays next page.
-     */
-    function onNextPage() {
-        if (pageNum >= pdfDoc.numPages) {
-            return;
-        }
-        pageNum++;
-        queueRenderPage(pageNum);
-    }
-    document.getElementById('next').addEventListener('click', onNextPage);
-
-    /**
-     * Asynchronously downloads PDF.
-     */
-    PDFJS.getDocument(url).then(function(pdfDoc_) {
-        pdfDoc = pdfDoc_;
-        document.getElementById('page_count').textContent = pdfDoc.numPages;
-
-        // Initial/first page rendering
-        renderPage(pageNum);
-    });
-</script>
-
-
-{% endblock %}
- {% block home %}
-
-{% endblock %}
-{#<!DOCTYPE html>#}
-{#<html>#}
-{#    <head>#}
-{#        <meta charset="utf-8">#}
-{#        <title>CKEditor</title>#}
-{#        <script src="//cdn.ckeditor.com/4.5.9/standard/ckeditor.js"></script>#}
-{#    </head>#}
-{#    <body>#}
-{#        <textarea name="editor1"></textarea>#}
-{#        <script>#}
-{#            CKEDITOR.replace( 'editor1' , {uiColor: '#9AB8F3'});#}
-{#        </script>#}
-{#    </body>#}
-{#</html>#}
+</body>
+</html>

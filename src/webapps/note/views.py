@@ -318,7 +318,7 @@ def save_choice(request,identity):
             c.students.add(student)
         elif request.POST[c.number + 'chosen'] == 'F':
             c.students.remove(student)
-    return render(request, 'create_note.html', context)
+    return redirect(reverse('index', args=(identity)))
 
 
 @login_required
@@ -347,19 +347,14 @@ def upload_note(request):
         filename=request.GET.get('filename')
         course_number=request.GET.get('course_number')
         identity = request.GET.get('identity')
-        print("hehe"+course_number)
+
         course = Course.objects.get(number=course_number)
-        print("hhh"+course.number)
+
         new_note = TextNote(author=request.user, course=course,filepath=path,filename=filename)
         new_note.body=info
         new_note.plaintext = info
         new_note.save()
-        print(new_note.body)
-        print(new_note.plaintext)
 
-        # if not name:
-        #     return HttpResponse("no notes for upload!")
-        # print(path+"\n")
         fd= open(path, 'a+')
         fd.write(info)
         fd.close()
@@ -381,14 +376,27 @@ def dropdown_courselist(request):
 
 @login_required
 @transaction.atomic
-def get_text_note(request, note_id):
+def get_text_note(request, note_id,course_id,identity):
+
     context = {}
+    context['identity'] = identity
+    course = Course.objects.get(id=course_id)
+    textnotes = TextNote.objects.get(id=note_id)
+    context['course_number'] = course.number
+    context['course_id'] = course.id
+    context['course_name'] = course.name
+    context['textnotes'] = textnotes.body
     return render(request, 'create_note.html', context)
+
 
 @login_required
 @transaction.atomic
 def get_pdf(request, note_id):
     context = {}
+    note = Note.objects.get(id=note_id)
+    context['file_url'] = note.file.url
+    context['filename'] = note.filename[:-4]
+    context['author'] = request.user.username
     return render(request, 'pdf.html', context)
 
 @login_required
