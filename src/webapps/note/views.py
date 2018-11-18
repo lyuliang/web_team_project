@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse, Http404, JsonResponse
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout,tokens
@@ -9,7 +11,7 @@ from note.forms import *
 from mimetypes import guess_type
 from django.core.mail import send_mail
 from django.db import transaction
-import time,os
+import time,os,io
 current_milli_time = lambda: int(round(time.time() * 1000))
 
 def logIn(request):
@@ -121,14 +123,17 @@ def index(request, identity):
         return render(request, 'index_prof.html', context)
 
 @login_required
-def course(request,course_id, identity):
+def course(request, course_id, identity):
     context = {}
     context['identity'] = identity
     course = Course.objects.get(id=course_id)
     notes = Note.objects.filter(course = course)
+    textnotes = TextNote.objects.filter(course = course)
     context['course_number'] = course.number
+    context['course_id'] = course.id
     context['course_name'] = course.name
     context['notes'] = notes
+    context['textnotes'] = textnotes
     return render(request,'course.html',context)
 
 @login_required
@@ -242,6 +247,7 @@ def create_note(request, course_number, identity):
         context['course_number'] = course_number
         course = Course.objects.get(number=course_number)
         context['course_name'] = course.name
+        context['course_id'] = course.id
         return render(request, 'create_note.html', context)
         # return render(request, 'pdf.html', context)
 
@@ -316,10 +322,11 @@ def upload_note(request):
         info = request.GET.get('fileinfo')
         filename=request.GET.get('filename')
         course_number=request.GET.get('course_number')
+        identity = request.GET.get('identity')
         print("hehe"+course_number)
         course = Course.objects.get(number=course_number)
         print("hhh"+course.number)
-        new_note = TextNote(course=course,filepath=path,filename=filename)
+        new_note = TextNote(author=request.user, course=course,filepath=path,filename=filename)
         new_note.body=info
         new_note.plaintext = info
         new_note.save()
@@ -338,6 +345,8 @@ def upload_note(request):
         # destination.close()
         return HttpResponse("upload over!")
 
+@login_required
+@transaction.atomic
 def dropdown_courselist(request):
     courses = Course.objects.all()
     courselist = []
@@ -345,3 +354,15 @@ def dropdown_courselist(request):
         courselist.append(course.name)
     print(courselist)
     return JsonResponse(courselist, safe=False)
+
+@login_required
+@transaction.atomic
+def get_text_note(request, note_id):
+    context = {}
+    return render(request, 'create_note.html', context)
+
+@login_required
+@transaction.atomic
+def show_pdf(request):
+    context = {}
+    return render(request, 'viewer.html', context)

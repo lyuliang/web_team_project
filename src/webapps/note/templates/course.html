@@ -52,7 +52,7 @@
 	</ul>
 	  <li class="dropleft">
 		  <button class="btn btn-primary btn-lg dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			User name
+			{{request.user.username}}
 		  </button>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 				  <li><a  class="dropdown-item" href="#">My Note</a></li>
@@ -75,17 +75,30 @@
 			</header>
 
 <!-- Section -->
-<div id = "note-list">
-{% for note in notes %}
+<div id = "note-list" style="margin-top:10px">
+{% for note in textnotes %}
 <section>
 		<header class="major">
-			<h2>{{note.filename}}</h2>
+			<img src="{% static 'img/txt.png' %}" style="height:100px; width:100px"> 
+			<a href="{% url 'get_text_note' note.id %}"><h2>{{note.filename}}</h2></a>
 			<h2> {{note.author.username}}</h2>
 		</header>
 		<div class="features">
-				<!-- <ul class="actions"> -->
-			<a href="#" class="button">Edit Note</a>
-					 <!-- </ul> -->
+			<!-- <a href="#" class="button">Edit Note</a>
+					 -->
+		</div>
+		
+	</section>
+{% endfor %}
+{% for note in notes %}
+<section>
+		<header class="major">
+				<img src="{% static 'img/pdf.png' %}" style="height:100px; width:100px">> 
+			<a href="{% url 'get_text_note' note.id %}"><h2>{{note.filename}}</h2></a>
+			<h2> {{note.author.username}}</h2>
+		</header>
+		<div class="features">
+				<!-- <a href="#" class="button">Edit Note</a> -->
 		</div>
 		
 	</section>
@@ -112,6 +125,7 @@
 	</header>
 	<ul>
 		<li><a href="{% url 'all_courses' identity %}">All Courses</a></li>
+		<li><a href="{% url 'course' course_id identity %}">All Notes</a></li>
 		<li><a href="#" data-toggle="modal" data-target="#exampleModal">Upload Materials</a></li>
 
       <!-- Modal -->

@@ -7865,7 +7865,7 @@ var fakeWorkerFilesLoader = null;
     useRequireEnsure = true;
   }
   if (typeof requirejs !== 'undefined' && requirejs.toUrl) {
-    fallbackWorkerSrc = requirejs.toUrl('pdf.worker.js');
+    fallbackWorkerSrc = requirejs.toUrl('pdfjs-dist/build/pdf.worker.js');
   }
   var dynamicLoaderSupported = typeof requirejs !== 'undefined' && requirejs.load;
   fakeWorkerFilesLoader = useRequireEnsure ? function () {
@@ -7873,7 +7873,7 @@ var fakeWorkerFilesLoader = null;
       require.ensure([], function () {
         try {
           var worker = void 0;
-          worker = require('pdf.worker.js');
+          worker = require('./pdf.worker.js');
           resolve(worker.WorkerMessageHandler);
         } catch (ex) {
           reject(ex);
@@ -7882,7 +7882,7 @@ var fakeWorkerFilesLoader = null;
     });
   } : dynamicLoaderSupported ? function () {
     return new Promise(function (resolve, reject) {
-      requirejs(['pdf.worker'], function (worker) {
+      requirejs(['pdfjs-dist/build/pdf.worker'], function (worker) {
         try {
           resolve(worker.WorkerMessageHandler);
         } catch (ex) {

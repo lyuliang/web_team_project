@@ -21,7 +21,6 @@
 <!-- Section -->
 <div id = "note-list">
 <textarea name="note" id="note" class="ckeditor"></textarea>
-
         <script type="text/javascript">
             CKEDITOR.replace( 'note' , {uiColor: '#9AB8F3'});
         </script>
@@ -35,6 +34,7 @@
    <label class="label">Please input your username:</label><input class="info" type="text" id="username" >
     <br>
     <label class="label">please input the filename:</label><input class="info" type="text" id="filename" >
+    <input id = "identity" type = "hidden" value="{{identity}}">
     <br>
 {#    <button class=" btn btn-primary  btn-lg dropdown-toggle " type="button" id="format" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
 {#			format#}

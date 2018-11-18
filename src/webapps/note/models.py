@@ -49,10 +49,11 @@ class Note(models.Model):
 
 
 class TextNote(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    filepath=models.CharField(max_length=200)
-    filename=models.CharField(max_length=200)
-    body = RichTextField()
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, default = '')
+    author = models.ForeignKey(User,on_delete=models.CASCADE, default = '')
+    filepath=models.CharField(max_length=200, default = '')
+    filename=models.CharField(max_length=200, default = '')
+    body = RichTextField(default = '')
     plaintext = models.CharField(max_length=sys.maxsize, blank=True, default='')
 
     def __str__(self):
