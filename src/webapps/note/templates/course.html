@@ -94,7 +94,7 @@
 <section>
 		<header class="major">
 				<img src="{% static 'img/pdf.png' %}" style="height:100px; width:100px">> 
-			<a href="{% url 'get_text_note' note.id %}"><h2>{{note.filename}}</h2></a>
+			<a href="{% url 'get_pdf' note.id %}"><h2>{{note.filename}}</h2></a>
 			<h2> {{note.author.username}}</h2>
 		</header>
 		<div class="features">

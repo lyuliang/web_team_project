@@ -22,5 +22,6 @@ urlpatterns = [
     path('dropdown_courselist/', note.views.dropdown_courselist, name='dropdown_courselist'),
     path('save_course/<str:identity>', note.views.save_choice, name = 'save_choice'),
     path('get_textnote/<int:note_id>', note.views.get_text_note, name = 'get_text_note'),
+    path('get_pdf/<int:note_id>', note.views.get_pdf, name = 'get_pdf'),
     path('show_pdf/', note.views.show_pdf, name = 'show_pdf'),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

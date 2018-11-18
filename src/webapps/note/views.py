@@ -363,6 +363,12 @@ def get_text_note(request, note_id):
 
 @login_required
 @transaction.atomic
+def get_pdf(request, note_id):
+    context = {}
+    return render(request, 'pdf.html', context)
+
+@login_required
+@transaction.atomic
 def show_pdf(request):
     context = {}
     return render(request, 'viewer.html', context)
