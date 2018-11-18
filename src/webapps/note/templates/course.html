@@ -78,14 +78,13 @@
 			</header>
 
 <!-- Section -->
-<div id = "note-list" style="margin-top:10px">
+<div id = "note-list" style="margin-top:10px" class="row">
 {% for note in textnotes %}
-<section>
+<section class="col-sm-4">
 		<header class="major">
 			<img src="{% static 'img/txt.png' %}" style="height:100px; width:100px"> 
-			<a href="{% url 'get_text_note' note.id course_id identity%}"><h2>{{note.filename}}
-					<a href="{% url 'download_txt' note.filename %}"><button class="btn btn-default">Download</button></a>
-			</h2></a>
+			<a href="{% url 'get_text_note' note.id course_id identity%}"><h3>{{note.filename}}</h3></a>
+			<a href="{% url 'download_txt' note.filename %}"><button class="btn btn-default">Download</button></a>
 			<p> Author : <em>{{note.author.username}}</em></p>
 		</header>
 		<div class="features">
@@ -96,12 +95,11 @@
 	</section>
 {% endfor %}
 {% for note in notes %}
-<section>
+<section class="col-sm-4">
 		<header class="major">
 				<img src="{% static 'img/pdf.png' %}" style="height:100px; width:100px"> 
-			<a href="{% url 'get_pdf' note.id %}"><h2>{{note.filename}}
-					<a href="{% url 'download_pdf' note.filename %}"><button class="btn btn-default">Download</button></a>
-			</h2></a>
+			<a href="{% url 'get_pdf' note.id %}"><h3>{{note.filename}}</h3></a>
+			<a href="{% url 'download_pdf' note.filename %}"><button class="btn btn-default">Download</button></a>
 			<p> Author : <em>{{note.author.username}}</em></p>
 		</header>
 		
