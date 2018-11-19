@@ -29,6 +29,10 @@
         <div id="author" style="display: none;">{{ author }}</div>
 	</div>
 
+    <div class="tool">
+		<a href="{% url 'course' course_id identity %}"><button class="btn btn-primary btn-sm">Back to Notes</button></a>
+	</div>
+
 	<div class="tool">
 		<label for="">Brush size</label>
 		<input type="number" class="form-control text-right" value="1" id="brush-size" max="50">
@@ -76,6 +80,7 @@
 	<div class="tool">
 		<button class="btn btn-info btn-sm" onclick="showPdfData()">{}</button>
 	</div>
+
 	<div class="tool">
 		<button class="btn btn-light btn-sm" onclick="savePDF()"><i class="fa fa-save"></i> Save</button>
 	</div>

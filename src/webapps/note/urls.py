@@ -23,7 +23,7 @@ urlpatterns = [
     path('save_course/<str:identity>', note.views.save_choice, name = 'save_choice'),
     path('get_textnote/<int:note_id>/<int:course_id>/<str:identity>/', note.views.get_text_note, name = 'get_text_note'),
   
-    path('get_pdf/<int:note_id>', note.views.get_pdf, name = 'get_pdf'),
+    path('get_pdf/<int:note_id>/<str:identity>/', note.views.get_pdf, name = 'get_pdf'),
     path('show_pdf/', note.views.show_pdf, name = 'show_pdf'),
     path('download_pdf/<str:note_name>/', note.views.download_pdf, name = 'download_pdf'),
     path('download_txt/<str:note_name>/', note.views.download_txt, name = 'download_txt'),

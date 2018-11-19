@@ -391,12 +391,14 @@ def get_text_note(request, note_id,course_id,identity):
 
 @login_required
 @transaction.atomic
-def get_pdf(request, note_id):
+def get_pdf(request, note_id, identity):
     context = {}
     note = Note.objects.get(id=note_id)
     context['file_url'] = note.file.url
     context['filename'] = note.filename[:-4]
     context['author'] = request.user.username
+    context['course_id'] = note.course.id
+    context['identity'] = identity
     return render(request, 'pdf.html', context)
 
 @login_required
