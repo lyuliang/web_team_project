@@ -55,6 +55,7 @@ class TextNote(models.Model):
     filename=models.CharField(max_length=200, default = '')
     body = RichTextField(default = '')
     plaintext = models.CharField(max_length=sys.maxsize, blank=True, default='')
+    access_type = models.CharField(max_length=20, blank=True, default='private')
 
     def __str__(self):
         return self.filename

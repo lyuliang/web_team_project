@@ -49,7 +49,7 @@
 
 	  </li>
 	  <li class="nav-item">
-		<a class="nav-link" href="#">My Favor</a>
+		<a class="nav-link" href="{% url 'get_all_my_note' identity %}">My Note</a>
 	  </li>
 	</ul>
 	  <li class="dropleft">
@@ -57,8 +57,8 @@
 			{{request.user.username}}
 		  </button>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				  <li><a  class="dropdown-item" href="#">My Note</a></li>
-                  <li><a  class="dropdown-item" href="#">Edit Information</a></li>
+				  <!--<li><a  class="dropdown-item" href="#">My Note</a></li>-->
+                  <!--<li><a  class="dropdown-item" href="#">Edit Information</a></li>-->
                     <li><a class="dropdown-item"  href="{% url 'logout'%}">Log out</a></li>
 			  </ul>
 	  </li>
@@ -98,7 +98,7 @@
 <section class="col-sm-4">
 		<header class="major">
 				<img src="{% static 'img/pdf.png' %}" style="height:100px; width:100px"> 
-			<a href="{% url 'get_pdf' note.id %}"><h3>{{note.filename}}</h3></a>
+			<a href="{% url 'get_pdf' note.id identity %}"><h3>{{note.filename}}</h3></a>
 			<a href="{% url 'download_pdf' note.filename %}"><button class="btn btn-default">Download</button></a>
 			<p> Author : <em>{{note.author.username}}</em></p>
 		</header>
@@ -113,6 +113,7 @@
 {% endblock %}
 
 <!-- Sidebar -->
+{% block sidebar %}
 <div id="sidebar">
 	<div class="inner">
 		<!-- Search -->
@@ -164,15 +165,15 @@
 
         <li><a href="{%url 'create_note' course_number identity %}">Create Notes</a ></li>
 
-		<li>
-			<span class="opener">Q & A</span>
-			<ul>
-				<li><a href="#">How to upload new materials</a></li>
-				<li><a href="#">How to add a note to my favor</a></li>
-				<li><a href="#">Only see someone's notes</a></li>
-				<li><a href="#">Only see notes of one course</a></li>
-			</ul>
-		</li>
+		<!--<li>-->
+			<!--<span class="opener">Q & A</span>-->
+			<!--<ul>-->
+				<!--<li><a href="#">How to upload new materials</a></li>-->
+				<!--<li><a href="#">How to add a note to my favor</a></li>-->
+				<!--<li><a href="#">Only see someone's notes</a></li>-->
+				<!--<li><a href="#">Only see notes of one course</a></li>-->
+			<!--</ul>-->
+		<!--</li>-->
 	</ul>
 </nav>
 
@@ -200,6 +201,7 @@
 	</ul>
 </section>
 
+
 <!-- Section -->
 <section>
 	<header class="major">
@@ -215,6 +217,7 @@
 </section>
 </div>
 </div>
+	{% endblock %}
 </div>
 
 

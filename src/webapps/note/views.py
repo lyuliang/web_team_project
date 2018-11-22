@@ -128,8 +128,8 @@ def course(request, course_id, identity):
     context = {}
     context['identity'] = identity
     course = Course.objects.get(id=course_id)
-    notes = Note.objects.filter(course = course)
-    textnotes = TextNote.objects.filter(course = course)
+    notes = Note.objects.filter(course = course,access_type="public")
+    textnotes = TextNote.objects.filter(course = course,access_type="public")
     context['course_number'] = course.number
     context['course_id'] = course.id
     context['course_name'] = course.name
@@ -342,26 +342,23 @@ def upload_note(request):
     if request.method=='GET':
         print("enter")
 
-        path=request.GET.get('filePath')
         info = request.GET.get('fileinfo')
-        filename=request.GET.get('filename')
+        filename=request.user.username+"-"+request.GET.get('filename')
+        path = request.GET.get('filePath')+filename
+        #filename=request.GET.get('filename')
         course_number=request.GET.get('course_number')
         identity = request.GET.get('identity')
+        type = request.GET.get('type')
 
         course = Course.objects.get(number=course_number)
 
-        new_note = TextNote(author=request.user, course=course,filepath=path,filename=filename)
+        new_note = TextNote(author=request.user, course=course,filepath=path,filename=filename,access_type=type)
         new_note.body=info
         new_note.plaintext = info
         new_note.save()
-
         fd= open(path, 'a+')
         fd.write(info)
         fd.close()
-        # print("finish")
-        # destination = open(os.path.join(path, name), 'wb+')
-        # destination.write(info)
-        # destination.close()
         return HttpResponse("upload over!")
 
 @login_required
@@ -406,3 +403,14 @@ def get_pdf(request, note_id, identity):
 def show_pdf(request):
     context = {}
     return render(request, 'viewer.html', context)
+
+@login_required
+@transaction.atomic
+def get_all_my_note(request,identity):
+    context = {}
+    notes = Note.objects.filter(author=request.user)
+    textnotes = TextNote.objects.filter(author=request.user)
+    context['notes'] = notes
+    context['textnotes'] = textnotes
+    context['identity'] = identity
+    return render(request, 'all_my_note.html', context)

@@ -27,4 +27,5 @@ urlpatterns = [
     path('show_pdf/', note.views.show_pdf, name = 'show_pdf'),
     path('download_pdf/<str:note_name>/', note.views.download_pdf, name = 'download_pdf'),
     path('download_txt/<str:note_name>/', note.views.download_txt, name = 'download_txt'),
+    path('get_all_my_note/<str:identity>/', note.views.get_all_my_note, name = 'get_all_my_note'),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

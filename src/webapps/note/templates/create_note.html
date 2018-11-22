@@ -3,6 +3,7 @@
 
  {% block css %}
      <link href="{% static 'css/create_note.css' %}" rel="stylesheet">
+
        {% endblock %}
 {% block js %}
 <script src="{% static 'js/create_note.js'%}"></script>
@@ -31,23 +32,48 @@
 </div>
 </div>
 
-<div id="input" class="input" style="display: none">
-   <label class="label">Please input your username:</label><input class="info" type="text" id="username" >
-    <br>
+<!--<div id="input" class="input" style="display: none">-->
+   <!--<label class="label">Please input your username:</label><input class="info" type="text" id="username" >-->
+    <!--<br>-->
+    <!--<label class="label">please input the filename:</label><input class="info" type="text" id="filename" >-->
+    <!--<input id = "identity" type = "hidden" value="{{identity}}">-->
+    <!--<br>-->
+    <!--<input type="button" name="submit2" id="submit2" value="submit">-->
+
+<!--</div>-->
+<!--{#    <button class=" btn btn-primary  btn-lg dropdown-toggle " type="button" id="format" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}-->
+<!--{#			format#}-->
+<!--{#		  </button>#}-->
+<!--{#			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">#}-->
+<!--{#				  <li><a class=" dropdown-item" href="#">.txt</a></li>#}-->
+<!--{#				  <li><a class=" dropdown-item" href="#">Edit Information</a></li>#}-->
+<!--{#				  <li><a class=" dropdown-item" href="{% url 'logout'%}">Log out</a></li>#}-->
+<!--{#			  </ul>#}-->
+
+
+<form id="input" class="input" style="display: none">
+    <!--<label class="label">Please input your username:</label><input class="info" type="text" id="username" >-->
+    <!--<br>-->
     <label class="label">please input the filename:</label><input class="info" type="text" id="filename" >
+    <label class="label">please select the format of the file:</label>
+    <select id="format">
+          <option value=".txt">.txt</option>
+          <option value=".doc">.doc</option>
+          <option value=".md">.md</option>
+    </select>
+
+    <!--<div id="radio">-->
+    <label class="label">Select the access type: </label>
+    <select id="type">
+          <option value="private">Private</option>
+          <option value="public">Public</option>
+    </select>
+
     <input id = "identity" type = "hidden" value="{{identity}}">
     <br>
-{#    <button class=" btn btn-primary  btn-lg dropdown-toggle " type="button" id="format" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
-{#			format#}
-{#		  </button>#}
-{#			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">#}
-{#				  <li><a class=" dropdown-item" href="#">.txt</a></li>#}
-{#				  <li><a class=" dropdown-item" href="#">Edit Information</a></li>#}
-{#				  <li><a class=" dropdown-item" href="{% url 'logout'%}">Log out</a></li>#}
-{#			  </ul>#}
     <input type="button" name="submit2" id="submit2" value="submit">
-
-</div>
+    <input type="button" name="submit3" id="cancel" value="cancel">
+</form>
 
 
 {% endblock %}

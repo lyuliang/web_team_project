@@ -5,28 +5,31 @@ $(document).ready(function () {
         var note=CKEDITOR.instances.note.getData();//get text content with format(<p>..)
         console.log(note);
         // alert(note);
-        var user,filename;
+        var format,filename;
         // title = prompt("please input the title of the note");
         // filename = prompt("please input the filename");
         var input =  document.getElementById("input");
         input.style.display ="";
         input.style.zIndex = 1;
+        $("#cancel").click(function(e) {
+        input.style.display ="none";
+        })
+
         $("#submit2").click(function (e) {
-            user = $("#username").val();
+            //user = $("#username").val();
             filename = $("#filename").val();
-
+            format=$("#format").val();
+            var type=$("#type").val();
             input.style.display ="none";
-            //alert(user);
-
-            save(user,filename,note);//save file locally
+            save(format,filename,note,type);//save file locally
         })
 
 
     });
 
-    function save(username,filename,note){
-     var file=username+"-"+filename;
-     var filePath = folder+file;
+    function save(format,filename,note,type){
+     var file=filename+format;
+     var filePath = folder;
      var fileinfo=note;
     var course=document.getElementById("course_number").innerText;
     console.log(course)
@@ -36,9 +39,11 @@ $(document).ready(function () {
                fileinfo:fileinfo,
                filename:file,
                course_number:course,
+               type:type
            },
            function (data) {
-           alert("success");
+           alert("success!");
+           location.reload();
            }
            );
     /*filesaver.js*/
