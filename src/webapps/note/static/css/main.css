@@ -124,7 +124,9 @@ input, select, textarea {
 		}
 
 /* Type */
-
+    button.close {
+		margin:0;
+	}
 	body, input, select, textarea {
 		color: #7f888f;
 		font-family: "Open Sans", sans-serif;
@@ -1826,9 +1828,9 @@ input, select, textarea {
 	label {
 		color: #3d4449;
 		display: block;
-		font-size: 0.9em;
+		font-size: 1.2em;
 		font-weight: 600;
-		margin: 0 0 1em 0;
+		margin: 10px 0 1em 0px;
 	}
 
 	input[type="text"],
@@ -2456,6 +2458,15 @@ input, select, textarea {
 			}
 
 /* Button */
+.file{
+    padding: 4px 10px;
+    height: 20px;
+    line-height: 20px;
+    position: relative;
+    border: 1px solid #999;
+    text-decoration: none;
+    color: #666;
+}
 
 	input[type="submit"],
 	input[type="reset"],

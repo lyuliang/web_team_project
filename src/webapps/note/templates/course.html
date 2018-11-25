@@ -74,7 +74,6 @@
 		<!-- Header -->
 			<header id="header">
 				<a href="course.html" class="logo"><strong>Materials</strong> for this course</a>
-				
 			</header>
 
 <!-- Section -->
@@ -131,6 +130,7 @@
 	<ul>
 		<li><a href="{% url 'all_courses' identity %}">All Courses</a></li>
 		<li><a href="{% url 'course' course_id identity %}">All Notes</a></li>
+
 		<li><a href="#" data-toggle="modal" data-target="#exampleModal">Upload Materials</a></li>
 
       <!-- Modal -->
@@ -139,20 +139,19 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Upload Your Note</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <h2 class="modal-title" id="exampleModalLabel">Upload Your Note</h2>
             </div>
             <div class="modal-body">
               <form class="form-signin" enctype="multipart/form-data" method="POST">
-                        <p class="h3 mb-3 font-weight-normal" id="signin">Please select a file to upload</p>
                         <div id="errors" ></div>
-                        <input type="file" name="input_file" id="input_file" />
-      {#                  <input type="text" name = "course_name" id="course_name" class="form-control" placeholder="Course Name" required autofocus>#}
-      {#                  <input type="text" name = "course_number" id="course_number" class="form-control" placeholder="Course Number (5 digits)" required maxlength="5">#}
-
-                        <button class="btn" type="button" id="upload">Upload</button>
+												<label >Please select a file to upload </label>
+												<input type="file" name="input_file" id="input_file"/> 
+												<label >Please Select the access type </label>
+												<select id="access">
+													<option value="private">private</option>
+													<option value="public">public</option>
+												</select>
+												<button class="btn" type="button" id="upload">Upload</button>
                         {% csrf_token %}
                       </form>
             </div>
@@ -164,60 +163,12 @@
       </div>
 
         <li><a href="{%url 'create_note' course_number identity %}">Create Notes</a ></li>
-
-		<!--<li>-->
-			<!--<span class="opener">Q & A</span>-->
-			<!--<ul>-->
-				<!--<li><a href="#">How to upload new materials</a></li>-->
-				<!--<li><a href="#">How to add a note to my favor</a></li>-->
-				<!--<li><a href="#">Only see someone's notes</a></li>-->
-				<!--<li><a href="#">Only see notes of one course</a></li>-->
-			<!--</ul>-->
-		<!--</li>-->
 	</ul>
 </nav>
 
-<!-- Section -->
-<section>
-	<header class="major">
-		<h2>Professors & Lecturers</h2>
-	</header>
-	<div class="mini-posts">
-		<article>
-			<a href="#" class="image"><img src="{% static 'img/sample.jpg' %}" alt="" /></a>
-			<p>Charlie...</p>
-		</article>
-		<article>
-			<a href="#" class="image"><img src="{% static 'img/pic08.jpg' %}" alt="" /></a>
-			<p>Sunshine...</p>
-		</article>
-		<article>
-			<a href="#" class="image"><img src="{% static 'img/pic09.jpg' %}" alt="" /></a>
-			<p>Professor 3</p>
-		</article>
-	</div>
-	<ul class="actions">
-		<li><a href="#" class="button">More</a></li>
-	</ul>
-</section>
-
-
-<!-- Section -->
-<section>
-	<header class="major">
-		<h2>Contact Us</h2>
-	</header>
-	<p>If you have any question about Note++, please feel free to contact us! You are always welcome to provide any feedback to us!</p>
-	<ul class="contact">
-		<li class="fa-envelope-o"><a href="#">note++@andrew.cmu.edu</a></li>
-		<li class="fa-phone">(000) 000-0000</li>
-		<li class="fa-home">5000 Forbes Ave<br />
-		PA, 15213</li>
-	</ul>
-</section>
 </div>
 </div>
-	{% endblock %}
+{% endblock %}
 </div>
 
 

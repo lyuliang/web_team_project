@@ -3,21 +3,70 @@
 
  {% block css %}
      <link href="{% static 'css/create_note.css' %}" rel="stylesheet">
-
        {% endblock %}
 {% block js %}
 <script src="{% static 'js/create_note.js'%}"></script>
 <script src="//cdn.ckeditor.com/4.5.9/standard/ckeditor.js"></script>
 <script src="https://cdn.bootcss.com/FileSaver.js/2014-11-29/FileSaver.js"></script>
 {% endblock %}
+{% block sidebar %}
+<div id="sidebar">
+	<div class="inner">
+		<!-- Search -->
+		<section id="search" class="alt">
+			<h2>
+                <p id="course_number">{{ course_number }}</p> <p id="course_name">{{ course_name }}</p>
+            </h2>
+		</section>
+
+<!-- Menu -->
+<nav id="menu">
+	<header class="major">
+		<h2>Menu</h2>
+	</header>
+	<ul>
+		<li><a href="{% url 'all_courses' identity %}">All Courses</a></li>
+		<li><a href="{% url 'course' course_id identity %}">All Notes</a></li>
+      <!-- Modal -->
+      {#<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+      <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title" id="exampleModalLabel">Upload Your Note</h2>
+            </div>
+            <div class="modal-body">
+              <form class="form-signin" enctype="multipart/form-data" method="POST">
+                        <div id="errors" ></div>
+												<label >Please select a file to upload </label>
+												<input type="file" name="input_file" id="input_file"/> 
+												<label >Please Select the access type </label>
+												<select name ="access">
+													<option value="private">Private</option>
+													<option value="public">Public</option>
+												</select>
+												<button class="btn" type="button" id="upload">Upload</button>
+                        {% csrf_token %}
+                      </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <li><a href="{%url 'create_note' course_number identity %}">Create Notes</a ></li>
+	</ul>
+</nav>
+
+</div>
+</div>
+{% endblock %}
 {% block main %}
 <!-- Main -->
 	<div id="main">
 		<div class="inner">
-		<!-- Header -->
-			<header id="header">
-				<a href="course.html" class="logo"><strong>Create note</strong> for this course</a>
-			</header>
 
 <!-- Section -->
 <div id = "note-list">
@@ -32,28 +81,7 @@
 </div>
 </div>
 
-<!--<div id="input" class="input" style="display: none">-->
-   <!--<label class="label">Please input your username:</label><input class="info" type="text" id="username" >-->
-    <!--<br>-->
-    <!--<label class="label">please input the filename:</label><input class="info" type="text" id="filename" >-->
-    <!--<input id = "identity" type = "hidden" value="{{identity}}">-->
-    <!--<br>-->
-    <!--<input type="button" name="submit2" id="submit2" value="submit">-->
-
-<!--</div>-->
-<!--{#    <button class=" btn btn-primary  btn-lg dropdown-toggle " type="button" id="format" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}-->
-<!--{#			format#}-->
-<!--{#		  </button>#}-->
-<!--{#			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">#}-->
-<!--{#				  <li><a class=" dropdown-item" href="#">.txt</a></li>#}-->
-<!--{#				  <li><a class=" dropdown-item" href="#">Edit Information</a></li>#}-->
-<!--{#				  <li><a class=" dropdown-item" href="{% url 'logout'%}">Log out</a></li>#}-->
-<!--{#			  </ul>#}-->
-
-
 <form id="input" class="input" style="display: none">
-    <!--<label class="label">Please input your username:</label><input class="info" type="text" id="username" >-->
-    <!--<br>-->
     <label class="label">please input the filename:</label><input class="info" type="text" id="filename" >
     <label class="label">please select the format of the file:</label>
     <select id="format">
@@ -77,17 +105,4 @@
 
 
 {% endblock %}
-{#<!DOCTYPE html>#}
-{#<html>#}
-{#    <head>#}
-{#        <meta charset="utf-8">#}
-{#        <title>CKEditor</title>#}
-{#        <script src="//cdn.ckeditor.com/4.5.9/standard/ckeditor.js"></script>#}
-{#    </head>#}
-{#    <body>#}
-{#        <textarea name="editor1"></textarea>#}
-{#        <script>#}
-{#            CKEDITOR.replace( 'editor1' , {uiColor: '#9AB8F3'});#}
-{#        </script>#}
-{#    </body>#}
-{#</html>#}
+

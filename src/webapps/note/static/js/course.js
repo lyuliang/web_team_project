@@ -8,8 +8,9 @@ function uploadFile(){
 
     var form_data = new FormData();
     form_data.append('input_file', $('#input_file').get(0).files[0]);
-    form_data.append('course_number', document.getElementById("course_number").innerText)
-
+    form_data.append('course_number', document.getElementById("course_number").innerText);
+    var access = $('#access').val()
+    form_data.append('access', access);
     $.ajax({
                 url:'/note/upload_file/',
                 type:'POST',
@@ -18,16 +19,10 @@ function uploadFile(){
                 contentType: false, // tell jquery not to set contentType
                 success: function(data) {
                     $('#exampleModal').modal('hide');
-                    $('#note-list').append(data);
-                    console.log($('#exampleModal').html)
+                    if(access == "public")
+                        $('#note-list').append(data);
                 }
-            }); // end ajax
-
-    // var input_file = $('#input_file').get(0).files[0];
-    // $.post("/note/upload_file/", {input_file: input_file})
-    //   .done(function(data) {
-    //
-    //   });
+            }); 
 }
 
 

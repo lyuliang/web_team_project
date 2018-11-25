@@ -236,6 +236,7 @@ def join_course(request):
     print(course.students)
     return render(request,'single-course.html', \
             context = {'course':course, 'identity':'S','unselected':unselected})
+
 @login_required
 @transaction.atomic
 def upload_file(request):
@@ -247,10 +248,10 @@ def upload_file(request):
         # form = NoteForm(request.FILES)
         if not uploaded_file:
             return HttpResponse('Must choose a file!')
-
         print('course# current', request.POST.get('course_number'))
         course = Course.objects.get(number=request.POST.get('course_number'))
-        new_note = Note(author=request.user, course=course, date=datetime.date, time=datetime.time)
+        new_note = Note(author=request.user, course=course, access_type = request.POST.get('access') \
+                , date=datetime.date, time=datetime.time)
         new_note.filename = uploaded_file._get_name()
         new_note.save()
         new_note.file.save(uploaded_file._get_name(), uploaded_file)
@@ -265,45 +266,11 @@ def create_note(request, course_number, identity):
     context = {}
     if request.method=='GET':
         context['identity'] = identity
-        # course = Course.objects.get(id=course_id)
-        # context['course_number'] = course.number
-        # context['course_name'] = course.name
         context['course_number'] = course_number
         course = Course.objects.get(number=course_number)
         context['course_name'] = course.name
         context['course_id'] = course.id
         return render(request, 'create_note.html', context)
-        # return render(request, 'pdf.html', context)
-
-# @login_required
-# @transaction.atomic
-# def upload_note(request):
-#     context = {}
-#     if request.method=='GET':
-#         print("enter")
-#         path=request.GET['filePath']
-#         info = request.GET['fileinfo']
-#
-#         # if not name:
-#         #     return HttpResponse("no notes for upload!")
-#         # print(path+"\n")
-#         fd= open(path, 'a+')
-#         # print("finish11\n")
-#         fd.write(info)
-#         # print("finish22\n")
-#         fd.close()
-#         # print("finish")
-#         # destination = open(os.path.join(path, name), 'wb+')
-#         # destination.write(info)
-#         # destination.close()
-#
-#         new_note = TextNote(author=request.user, course=course, date=datetime.date, time=datetime.time)
-#         new_note.filename = uploaded_file._get_name()
-#         new_note.save()
-#         new_note.file(upload_file = '')
-#         new_note.file.save(uploaded_file._get_name(), uploaded_file)
-#
-#         return HttpResponse("upload over!")
 
 @login_required
 @transaction.atomic
@@ -349,9 +316,7 @@ def upload_note(request):
         course_number=request.GET.get('course_number')
         identity = request.GET.get('identity')
         type = request.GET.get('type')
-
         course = Course.objects.get(number=course_number)
-
         new_note = TextNote(author=request.user, course=course,filepath=path,filename=filename,access_type=type)
         new_note.body=info
         new_note.plaintext = info
