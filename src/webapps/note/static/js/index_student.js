@@ -51,6 +51,10 @@ $(document).ready(function () {
       e.preventDefault();
       joinCourse();
   });
+  $('#join-btn').click(function (e) {
+    e.preventDefault();
+    $('#save-btn').click();
+});
   $('.btn-join').click(function (e) {
     e.preventDefault();
     $(this).parent().parent().find('#chosen').val('T');

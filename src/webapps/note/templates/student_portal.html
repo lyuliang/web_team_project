@@ -1,10 +1,19 @@
 {% extends "index_base.html" %}
+{% block action %}
+<header class="major">
+    <h2>Click Save Button </h2>
+  </header>
+    <!-- Button trigger modal -->
+    <button id = "join-btn" style="font-size:1.5em" >
+        Save Choice
+      </button>
+{% endblock %}
 {% block courses %}
+<header class="major h3"> All Courses </header>
 {% load static %}
-
 <form action = "{% url 'save_choice' identity %}" method="POST">
   {% csrf_token %}
-    <button type="submit" class="btn btn-default" >Save Choice</button>
+    <button type="submit" id = "save-btn" style="display:none">Save Choice</button>
 <div class="posts">
     {% for course in courses %}
     <article>
