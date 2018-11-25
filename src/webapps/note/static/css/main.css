@@ -3345,9 +3345,12 @@ input, select, textarea {
 		@media screen and (max-width: 1680px) {
 
 			#header {
-				padding-top: 5em;
+				padding-top: 1em;
 			}
 
+		}
+		.course-info{
+			position: absolute; top: 15%; left: 25%; right:25%; text-align:center;
 		}
 
 		@media screen and (max-width: 736px) {

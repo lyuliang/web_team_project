@@ -50,8 +50,6 @@
 			{{request.user.username}}
 		  </button>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				  <li><a class=" dropdown-item" href="#">My Note</a></li>
-				  <li><a class=" dropdown-item" href="#">Edit Information</a></li>
 				  <li><a class=" dropdown-item" href="{% url 'logout'%}">Log out</a></li>
 			  </ul>
 
@@ -66,16 +64,10 @@
     <div class="inner">
     <!-- Header -->
         <header id="header">
-            <a href="{% url 'all_courses' identity %}" class="logo"><h3>Join in Courses in 2018 Fall As You Like!</h3></a>
+            <a href="{% url 'all_courses' identity %}" class="logo"><h3> All Courses in 2018 Fall</h3></a>
         </header>
-
-<!-- Section -->
-<section>
-<header class="major">
-<h2>Course List</h2>
-</header>
+<header class="major h3"> Joined Courses </header>
 {% block courses %}{% endblock %}
-      </section>
 	</div>
 </div>
 
@@ -85,21 +77,22 @@
 
 <!-- Section -->
 	<section>
-		<header class="major">
-			<h2>Contact Us</h2>
-		</header>
-		<p>If you have any question about Note++, please feel free to contact us! You are always welcome to provide any feedback to us!</p>
-		<ul class="contact">
-			<li class="fa-envelope-o"><a href="#">note++@andrew.cmu.edu</a></li>
-			<li class="fa-phone">(000) 000-0000</li>
-			<li class="fa-home">5000 Forbes Ave<br />
-			PA, 15213</li>
-		</ul>
+		{% block action %}
+		{% endblock %}
 	</section>
+	<section>
+			<p>If you have any question about Note++, Please feel free to contact us</p>
+			<ul class="contact">
+				<li class="fa-envelope-o"><a href="#">djangoauthority@gmail.com</a></li>
+				<li class="fa-phone">(412) 708-4889</li>
+				<li class="fa-home">5000 Forbes Ave<br />
+				PA, 15213</li>
+			</ul>
+		</section>
 
 	<!-- Footer -->
 		<footer id="footer">
-			<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+			<p class="copyright">&copy;All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
 		</footer>
     </div>
   </div>

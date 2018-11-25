@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
 		<title>Courses Hub</title>
@@ -57,8 +52,6 @@
 			{{request.user.username}}
 		  </button>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				  <!--<li><a  class="dropdown-item" href="#">My Note</a></li>-->
-                  <!--<li><a  class="dropdown-item" href="#">Edit Information</a></li>-->
                     <li><a class="dropdown-item"  href="{% url 'logout'%}">Log out</a></li>
 			  </ul>
 	  </li>
@@ -87,8 +80,6 @@
 			<p> Author : <em>{{note.author.username}}</em></p>
 		</header>
 		<div class="features">
-			<!-- <a href="#" class="button">Edit Note</a>
-					 -->
 		</div>
 		
 	</section>
