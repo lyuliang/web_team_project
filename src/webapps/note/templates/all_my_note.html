@@ -15,15 +15,16 @@
 {% for note in textnotes %}
 <section class="col-sm-4">
 		<header class="major">
-			<img src="{% static 'img/txt.png' %}" style="height:100px; width:100px">
-            <a href="{% url 'get_text_note' note.id note.course_id identity%}"><h3>{{note.filename}}</h3></a>
+			<img src="{% static 'img/txt.png' %}" style="height:100px; width:100px"> 
+			<a href="{% url 'get_text_note' note.id note.course_id identity%}"><h3>{{note.filename}}
+					{% if note.access_type == "private" %}
+					<span class="btn-secondary"> Private</span>
+					{% endif %}
+			</h3></a>
 			<a href="{% url 'download_txt' note.filename %}"><button class="btn btn-default">Download</button></a>
-			<p> Author : <em>{{note.author.username}}</em></p>
             <p> Course : <em>{{note.course.number}}{{note.course.name}}</em></p>
 		</header>
 		<div class="features">
-			<!-- <a href="#" class="button">Edit Note</a>
-					 -->
 		</div>
 
 	</section>
@@ -32,13 +33,15 @@
 <section class="col-sm-4">
 		<header class="major">
 				<img src="{% static 'img/pdf.png' %}" style="height:100px; width:100px">
-			<a href="{% url 'get_pdf' note.id identity %}"><h3>{{note.filename}}</h3></a>
+			<a href="{% url 'get_pdf' note.id identity %}"><h3>{{note.filename}}
+					{% if note.access_type == "private" %}
+					<span class="btn-secondary"> Private</span>
+					{% endif %}
+			</h3></a>
 			<a href="{% url 'download_pdf' note.filename %}"><button class="btn btn-default">Download</button></a>
-			<p> Author : <em>{{note.author.username}}</em></p>
             <p> Course : <em>{{note.course.number}}{{note.course.name}}</em></p>
 		</header>
 		<div class="features">
-				<!-- <a href="#" class="button">Edit Note</a> -->
 		</div>
 	</section>
 {% endfor %}
