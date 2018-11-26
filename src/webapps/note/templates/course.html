@@ -47,7 +47,8 @@
 	  </li>
 	</ul>
 	  <li class="dropleft">
-		  <button class="btn btn-default dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<input type="hidden" id = "hiddenusername" value = "{{request.user.username}}">
+		  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			{{request.user.username}}
 		  </button>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -65,9 +66,11 @@
 		<div class="inner">
 		<!-- Header -->
 			<header id="header">
-				<a href="course.html" class="logo"><strong>Materials</strong> for this course</a>
+				<h3><strong>Notes</strong> for this course</h3>
 			</header>
-
+			<input type="checkbox" id="showMine" name="showMine">
+			<label for="showMine"> Show My Uploaded Notes</label>
+		
 <!-- Section -->
 <div id = "note-list" style="margin-top:10px" class="row">
 {% for note in textnotes %}

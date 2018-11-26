@@ -1,11 +1,5 @@
 
 function uploadFile(){
-    // console.log($('#course_number').val())
-    // console.log($('#course_number').html)
-    // console.log($('#course_number').innerText)
-    // console.log($('#course_number').innerHTML)
-    // console.log(document.getElementById("course_number").innerText)
-
     var form_data = new FormData();
     form_data.append('input_file', $('#input_file').get(0).files[0]);
     form_data.append('course_number', document.getElementById("course_number").innerText);
@@ -29,13 +23,37 @@ function uploadFile(){
 $(document).ready(function () {
   console.log("Document Ready")
   // Add event-handlers
+  $('#showMine').attr('checked',false);
+  // Event Listener for checkbox
+  $("#showMine").change(function() { 
+    var secs = $('section.col-sm-4');
+    var name = $('#hiddenusername').val();
+      // Uncheck, get all notes
+    if(!$(this).is(':checked'))
+    {
+        for(var i = 0; i < secs.length; i++)
+        {
+            $(secs[i]).css('display','block');
+        }
+    }
+    // Check, get only my notes
+    else{ 
+        for(var i = 0; i < secs.length; i++)
+        {
+            var sec_name = $(secs[i]).find('em').html();
+            if(sec_name != name)
+            {
+                $(secs[i]).css('display','none');
+            }
+        }
+    }
+    });
   $("#upload").click(function (e) {
       e.preventDefault();
       uploadFile();
   });
 
-  // 开始时显示一遍课程列表
-  // initialCourseList(); //待实现
+  
 
   // CSRF set-up copied from Django docs
   function getCookie(name) {
