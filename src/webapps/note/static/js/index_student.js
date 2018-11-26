@@ -58,14 +58,16 @@ $(document).ready(function () {
   $('.btn-join').click(function (e) {
     e.preventDefault();
     $(this).parent().parent().find('#chosen').val('T');
-    $(this).css('background-color','#f16615');
+    $(this).css('background-color','#d9534f');
+    $(this).css('color','#ffffff');
     $(this).html('Joined');
     });
    $('.btn-cancel').click(function (e) {
     e.preventDefault();
     $(this).parent().parent().find('#chosen').val('F');
     var join = $(this).parent().parent().find('.btn-join');
-    join.css('background-color','#d9534f');
+    join.css('color','#d9534f');
+    join.css('background-color','#ffffff'); 
     join.html('Join In');
     });
 
