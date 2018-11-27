@@ -19,6 +19,10 @@
 			<a href="{% url 'get_text_note' note.id note.course_id identity%}"><h3>{{note.filename}}
 					{% if note.access_type == "private" %}
 					<span class="btn-secondary"> Private</span>
+				    <a href="{% url 'make_public' note.id identity %}"><button class="btn btn-default">Make Public</button></a>
+					{% endif %}
+				    {% if note.access_type == "public" %}
+				    <a href="{% url 'make_private' note.id identity %}"><button class="btn btn-default">Make Private</button></a>
 					{% endif %}
 			</h3></a>
 			<a href="{% url 'download_txt' note.filename %}"><button class="btn btn-default">Download</button></a>

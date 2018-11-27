@@ -28,4 +28,6 @@ urlpatterns = [
     path('download_pdf/<str:note_name>/', note.views.download_pdf, name = 'download_pdf'),
     path('download_txt/<str:note_name>/', note.views.download_txt, name = 'download_txt'),
     path('get_all_my_note/<str:identity>/', note.views.get_all_my_note, name = 'get_all_my_note'),
+    path('make_public/<int:note_id>/<str:identity>', note.views.make_public, name = 'make_public'),
+    path('make_private/<int:note_id>/<str:identity>', note.views.make_private, name = 'make_private'),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
