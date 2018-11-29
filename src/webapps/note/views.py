@@ -446,3 +446,33 @@ def make_private(request,note_id,identity):
     context['textnotes'] = textnotes
     context['identity'] = identity
     return render(request, 'all_my_note.html', context)
+
+@login_required
+@transaction.atomic
+def make_pdf_public(request,note_id,identity):
+    note = Note.objects.get(id=note_id,author=request.user)
+    note.access_type="public"
+    note.save()
+    context = {}
+    print("has saved! "+note.access_type)
+    notes = Note.objects.filter(author=request.user)
+    textnotes = TextNote.objects.filter(author=request.user)
+    context['notes'] = notes
+    context['textnotes'] = textnotes
+    context['identity'] = identity
+    return render(request, 'all_my_note.html', context)
+
+@login_required
+@transaction.atomic
+def make_pdf_private(request,note_id,identity):
+    note = Note.objects.get(id=note_id, author=request.user)
+    note.access_type = "private"
+    note.save()
+    context = {}
+    # print("has saved! " + note.access_type)
+    notes = Note.objects.filter(author=request.user)
+    textnotes = TextNote.objects.filter(author=request.user)
+    context['notes'] = notes
+    context['textnotes'] = textnotes
+    context['identity'] = identity
+    return render(request, 'all_my_note.html', context)
