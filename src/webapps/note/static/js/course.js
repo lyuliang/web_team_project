@@ -12,10 +12,18 @@ function uploadFile(){
                 processData: false,  // tell jquery not to process the data
                 contentType: false, // tell jquery not to set contentType
                 success: function(data) {
-                    $('#exampleModal').modal('hide');
-                    // if(access == "public")
-                    //     $('#note-list').append(data);
-                    $('#note-list').append(data);
+                    console.log(data)
+                    if (data.startsWith("<")) {
+                        $('#exampleModal').modal('hide');
+                        // if(access == "public")
+                        //     $('#note-list').append(data);
+
+                        $('#note-list').append(data);
+                    }
+                    else {
+                        console.log('errors:')
+                        document.getElementById("errors").innerText = data
+                    }
                 }
             }); 
 }

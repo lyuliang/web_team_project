@@ -252,11 +252,11 @@ def upload_file(request):
         print(request.FILES)
         uploaded_file = request.FILES.get('input_file')
         print(type(uploaded_file))
-        print(uploaded_file._get_name())
         # form = NoteForm(request.FILES)
         if not uploaded_file:
             return HttpResponse('Must choose a file!')
         if not uploaded_file._get_name().endswith('.pdf'):
+            print('\nfile type error\n')
             return HttpResponse('File type must be PDF!')
         print('course# current', request.POST.get('course_number'))
         course = Course.objects.get(number=request.POST.get('course_number'))
