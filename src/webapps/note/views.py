@@ -1,3 +1,5 @@
+import base64
+
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse, Http404, JsonResponse
 from django.http import FileResponse
@@ -13,6 +15,7 @@ from django.core.mail import send_mail
 from django.db import transaction
 import time,os,io
 from wsgiref.util import FileWrapper
+from django.views.decorators.csrf import csrf_exempt
 current_milli_time = lambda: int(round(time.time() * 1000))
 
 def logIn(request):
@@ -129,7 +132,11 @@ def course(request, course_id, identity):
     context['identity'] = identity
     course = Course.objects.get(id=course_id)
     notes = Note.objects.filter(course = course,access_type="public")
+    notes2 = Note.objects.filter(course=course,access_type="private",author=request.user)
+    notes = notes | notes2
     textnotes = TextNote.objects.filter(course = course,access_type="public")
+    textnotes2 = TextNote.objects.filter(course = course,access_type="private",author=request.user)
+    textnotes = textnotes | textnotes2
     context['course_number'] = course.number
     context['course_id'] = course.id
     context['course_name'] = course.name
@@ -139,7 +146,7 @@ def course(request, course_id, identity):
 
 @login_required
 def download_txt(request, note_name):
-    path = './media/textNote/';
+    path = './media/textNote/'
     os.path.expanduser(path)
     print(path + note_name)
     file = open(path + note_name,"rb")
@@ -242,12 +249,15 @@ def join_course(request):
 def upload_file(request):
     if request.method == 'POST':
         print(request.POST)
+        print(request.FILES)
         uploaded_file = request.FILES.get('input_file')
         print(type(uploaded_file))
         print(uploaded_file._get_name())
         # form = NoteForm(request.FILES)
         if not uploaded_file:
             return HttpResponse('Must choose a file!')
+        if not uploaded_file._get_name().endswith('.pdf'):
+            return HttpResponse('File type must be PDF!')
         print('course# current', request.POST.get('course_number'))
         course = Course.objects.get(number=request.POST.get('course_number'))
         new_note = Note(author=request.user, course=course, access_type = request.POST.get('access') \
@@ -259,6 +269,30 @@ def upload_file(request):
         return render(request,'single-note.html', context = {'note':new_note, 'identity':'S'})
 
     return render(request,'course.html',{})
+
+@login_required
+@transaction.atomic
+@csrf_exempt
+def save_annotation(request):
+    request.body    # Do not delete this line
+    print(request.POST)
+    print(request.FILES)
+
+    pdf = request.FILES.get('input_file')
+
+    course_id = request.POST.get('course_id')
+    course = Course.objects.get(id=course_id)
+    annotation = Note(author=request.user, course=course, access_type=request.POST.get('access') \
+                    , date=datetime.date, time=datetime.time)
+    annotation.filename = pdf._get_name()
+    print('anno filename:'+annotation.filename)
+    print('anno uploadto:')
+    print(annotation.file)
+    print('anno course: '+annotation.course.name)
+    annotation.save()
+    annotation.file.save(pdf._get_name(), pdf)
+    # return render(request, 'single-note.html', context = {'note':annotation, 'identity':'S'})
+    return HttpResponse('/note/course/'+course_id+'/S/')
 
 @login_required
 @transaction.atomic

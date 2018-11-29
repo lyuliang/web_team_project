@@ -13,8 +13,9 @@ function uploadFile(){
                 contentType: false, // tell jquery not to set contentType
                 success: function(data) {
                     $('#exampleModal').modal('hide');
-                    if(access == "public")
-                        $('#note-list').append(data);
+                    // if(access == "public")
+                    //     $('#note-list').append(data);
+                    $('#note-list').append(data);
                 }
             }); 
 }

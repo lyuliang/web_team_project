@@ -127,3 +127,7 @@ MEDIA_URL = '/media/'
 CKEDITOR_UPLOAD_PATH = "textNote"
 CKEDITOR_IMAGE_BACKEND = "pillow"
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 524288000000
+
+LOGIN_URL = '/note/login'

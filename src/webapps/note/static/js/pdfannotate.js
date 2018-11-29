@@ -5,6 +5,29 @@
 var save_name;
 $(document).ready(function () {
 	save_name = $("#filename").html()+'-'+$("#author").html() + '.pdf'
+
+	function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
+  var csrftoken = getCookie('csrftoken');
+  $.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+    }
+  });
+
 });
 
 var PDFAnnotate = function(container_id, url) {
@@ -153,10 +176,48 @@ PDFAnnotate.prototype.savePdf = function () {
 	        doc.addPage();
 	        doc.setPage(index + 1);
 	    }
-	    console.log(fabricObj.toDataURL())
-	    doc.addImage(fabricObj.toDataURL(), 'png', 0, 0, this.width/4, this.height/4);
+	    // doc.addImage(fabricObj.toDataURL({quality:0.3}), 'png', 0, 0, this.width/4, this.height/4);
+		doc.addImage(fabricObj.toDataURL(), 'png', 0, 0, this.width/4, this.height/4);
 	});
-	doc.save(save_name);
+
+	var blob = doc.output('blob');
+
+	var file = new File([blob], save_name, {type: "application/pdf;base64"})
+
+	var form_data = new FormData();
+
+	form_data.append('input_file', file);
+
+	var course_id = $('#course_id').val();
+
+	form_data.append('course_id', course_id)
+    var radios = $('[name="access"]')
+	var access;
+	for (var i = 0; i < radios.length; i++)
+	{
+	 if (radios[i].checked)
+	 {
+	 	access = radios[i].value;
+	  break;
+	 }
+	}
+
+    form_data.append('access', access);
+
+    $.ajax({
+                url:'/note/save_annotation/',
+                type:'POST',
+                data: form_data,
+                processData: false,  // tell jquery not to process the data
+                contentType: false, // tell jquery not to set contentType
+				dataType: 'text',
+                success: function(data) {
+                	if (data) {
+                        location.href = '/note/course/'+course_id+'/'+$('#identity').val()+'/';
+                    }
+                }
+            });
+    window.alert("PDF with Annotations Saved Successfully");  // Do not delete this line
 }
 
 PDFAnnotate.prototype.setBrushSize = function (size) {
