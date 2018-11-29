@@ -109,9 +109,12 @@ def index(request, identity):
             courses = student.course_set.all()
             if len(courses):
                 context['courses'] = courses
+                return render(request, 'index_student.html', context)
             else:
                 context['courses'] = Course.objects.all()
-        return render(request, 'index_student.html', context)
+                context['cschosen'] = []
+                return render(request, 'student_portal.html', context)
+    # Professor 
     else:
         if request.method == 'GET':
             print('CreateCourseForm()')

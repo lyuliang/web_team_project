@@ -15,9 +15,6 @@ function uploadFile(){
                     console.log(data)
                     if (data.startsWith("<")) {
                         $('#exampleModal').modal('hide');
-                        // if(access == "public")
-                        //     $('#note-list').append(data);
-
                         $('#note-list').append(data);
                     }
                     else {
