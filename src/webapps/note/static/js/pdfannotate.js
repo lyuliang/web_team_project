@@ -210,7 +210,9 @@ PDFAnnotate.prototype.savePdf = function () {
                 data: form_data,
                 processData: false,  // tell jquery not to process the data
                 contentType: false, // tell jquery not to set contentType
-				dataType: 'text',
+		async:false,
+	        enctype: 'multipart/form-data',
+	    //dataType: 'text',
                 success: function(data) {
                 	if (data) {
                         location.href = '/note/course/'+course_id+'/'+$('#identity').val()+'/';
@@ -218,6 +220,7 @@ PDFAnnotate.prototype.savePdf = function () {
                 }
             });
     window.alert("PDF with Annotations Saved Successfully");  // Do not delete this line
+    window.location.href = '/note/course/'+course_id+'/'+$('#identity').val()+'/';
 }
 
 PDFAnnotate.prototype.setBrushSize = function (size) {

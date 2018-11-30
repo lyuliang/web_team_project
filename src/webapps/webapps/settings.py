@@ -25,7 +25,7 @@ SECRET_KEY = 'gwoy!2z(sjof@at#+1mqx!@3gscu$q37jmmros&73h6$)13yh7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['198.211.113.95','localhost']
 
 
 # Application definition
@@ -79,9 +79,15 @@ WSGI_APPLICATION = 'webapps.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+       # 'ENGINE': 'django.db.backends.sqlite3',
+       # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'myproject',
+        'USER': 'myprojectuser',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '',
+       }
 }
 
 
@@ -122,6 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_ROOT = os.path.join(BASE_DIR,'media') #meedia Directions?
 MEDIA_URL = '/media/'
 CKEDITOR_UPLOAD_PATH = "textNote"
