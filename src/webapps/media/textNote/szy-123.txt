@@ -1,6 +1,0 @@
-<h1 style="font-style: italic;"><strong>MyNode for 17637</strong></h1>
-
-<ul>
-	<li><strong>123</strong></li>
-	<li><strong>456</strong></li>
-</ul>
