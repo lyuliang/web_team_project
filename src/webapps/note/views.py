@@ -265,9 +265,11 @@ def upload_file(request):
         course = Course.objects.get(number=request.POST.get('course_number'))
         new_note = Note(author=request.user, course=course, access_type = request.POST.get('access') \
                 , date=datetime.date, time=datetime.time)
-        new_note.filename = uploaded_file._get_name()
+        filename = uploaded_file._get_name()
+        filename = filename.replace(' ', '_')
+        new_note.filename = filename
         new_note.save()
-        new_note.file.save(uploaded_file._get_name(), uploaded_file)
+        new_note.file.save(filename, uploaded_file)
 
         return render(request,'single-note.html', context = {'note':new_note, 'identity':'S'})
 
@@ -277,7 +279,7 @@ def upload_file(request):
 @transaction.atomic
 @csrf_exempt
 def save_annotation(request):
-    request.body    # Do not delete this line
+    #print(request.body)    # Do not delete this line
     print(request.POST)
     print(request.FILES)
 
@@ -287,13 +289,17 @@ def save_annotation(request):
     course = Course.objects.get(id=course_id)
     annotation = Note(author=request.user, course=course, access_type=request.POST.get('access') \
                     , date=datetime.date, time=datetime.time)
-    annotation.filename = pdf._get_name()
+    filename = pdf._get_name()
+    print(filename)
+    filename = filename.replace(' ', '_')
+    print(filename)
+    annotation.filename = filename
     print('anno filename:'+annotation.filename)
     print('anno uploadto:')
     print(annotation.file)
     print('anno course: '+annotation.course.name)
     annotation.save()
-    annotation.file.save(pdf._get_name(), pdf)
+    annotation.file.save(filename, pdf)
     # return render(request, 'single-note.html', context = {'note':annotation, 'identity':'S'})
     return HttpResponse('/note/course/'+course_id+'/S/')
 
@@ -348,6 +354,7 @@ def upload_note(request):
 
         info = request.GET.get('fileinfo')
         filename=request.user.username+"-"+request.GET.get('filename')
+        filename = filename.replace(' ', '_')
         path = request.GET.get('filePath')+filename
         #filename=request.GET.get('filename')
         course_number=request.GET.get('course_number')

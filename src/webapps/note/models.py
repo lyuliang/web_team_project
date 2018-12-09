@@ -53,8 +53,9 @@ class TextNote(models.Model):
     author = models.ForeignKey(User,on_delete=models.CASCADE, default = '')
     filepath=models.CharField(max_length=200, default = '')
     filename=models.CharField(max_length=200, default = '')
-    body = RichTextField(default = '')
-    plaintext = models.CharField(max_length=sys.maxsize, blank=True, default='')
+    body = RichTextField(blank=True,default = '')
+ #  body = models.CharField(max_length=sys.maxsize, blank=True, default='')
+    plaintext = models.CharField(max_length=100000,blank=True, default='')
     access_type = models.CharField(max_length=20, blank=True, default='private')
 
     def __str__(self):
